@@ -4,9 +4,7 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import Link from "next/link";
-export const metadata = {
-  title: 'My Title',
-}
+
 const initialValues = {
   firstName: "",
   lastName: "",

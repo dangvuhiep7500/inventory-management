@@ -14,5 +14,11 @@ module.exports = {
       },
     },
   },
+  variants: {
+    extend: {
+      visibility: ["group-hover"],
+    },
+  },
   plugins: [require("flowbite/plugin")],
+  
 }
