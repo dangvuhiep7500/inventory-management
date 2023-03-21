@@ -1,5 +1,9 @@
 import '@/styles/globals.css';
-import { Head } from 'next/document';
+export const metadata = {
+  title: 'Home',
+  description: 'Welcome to Next.js',
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -8,10 +12,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>NextJs typescript</title>
-        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+        <link rel="shortcut icon" href="/icon.jpg" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
+        />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
-  )
+  );
 }
