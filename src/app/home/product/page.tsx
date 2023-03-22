@@ -22,7 +22,7 @@ export default function PageProduct() {
   }, [avatar]);
 
   const handlePreviewAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
+    const file = e.target.files?.[0];
     if (file) {
       const avatarFile: AvatarFile = Object.assign(file, {
         preview: URL.createObjectURL(file),
@@ -151,13 +151,15 @@ export default function PageProduct() {
                       </>
                     ) : (
                       <img
-                        className="block rounded-lg shadow-2xl p-2.5 h-48 w-48 object-cover"
-                        src={"/img/2.png"}
+                        className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover dark:invert dark:shadow-none"
+                        src={"/blank-image.svg"} 
                       />
+                      // <div className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover bg-[url('/blank-image.svg')] dark:bg-[url('/icon.jpg')]">
+                      // </div>
                     )}
                     <label
                       htmlFor="avatar-upload"
-                      className="absolute top-0 right-0 p-1 bg-gray-800 text-white rounded-full cursor-pointer"
+                      className="absolute top-[-0.2rem] right-[-0.2rem] p-1.5 bg-gray-800 text-white rounded-full cursor-pointer"
                     >
                       <GoPencil className="text-sm" />
                     </label>

@@ -24,12 +24,13 @@ export const ReactQuillEditor = () => {
   };
     return (
       <ReactQuill
-        className="my-quill h-64 mt-2 mb-14 dark:text-white"
+        className="my-quill mt-2 dark:text-white"
         value={editorContent}
         onChange={(value) => {
           setEditorContent(value);
         }}
         modules={modules}
+        placeholder='Type your text here...'
       />
     );
 }

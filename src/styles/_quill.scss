@@ -1,21 +1,28 @@
 .my-quill {
   .ql-snow {
     @apply border border-gray-300 rounded dark:border-gray-700;
+  }
+  .ql-fill {
+    @apply fill-gray-500;
+  }
 
-    .ql-fill {
-      @apply fill-gray-500;
-    }
+  .ql-picker-label {
+    @apply text-gray-500;
+  }
 
-    .ql-picker-label {
-      @apply text-gray-500;
-    }
+  .ql-toolbar {
+    @apply p-3;
+  }
 
-    .ql-toolbar {
-      @apply p-3;
-    }
-
-    .ql-stroke {
-      @apply stroke-gray-500
-    }
+  .ql-stroke {
+    @apply stroke-gray-500
+  }
+  .ql-editor {
+    @apply min-h-[250px];
+    &.ql-blank {
+      &:before {
+        @apply  text-gray-500
+      }
+  }
   }
 }

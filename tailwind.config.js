@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       visibility: ["group-hover"],
     },
+    filter: ['responsive', 'hover', 'focus', 'dark'],
   },
   plugins: [require("flowbite/plugin")],
 }
