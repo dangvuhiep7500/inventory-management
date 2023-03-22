@@ -1,0 +1,22 @@
+.tagify__dropdown {
+  .tagify__dropdown__item {
+    @apply inline-block text-base m-1 border-none bg-gray-100 text-black rounded-lg dark:bg-[#2B2B40] dark:text-[#92929F];
+
+    &:hover,
+    &.tagify__dropdown__item--active {
+      @apply text-[#009ef7]
+    }
+  }
+
+  .tagify__dropdown__wrapper {
+    @apply border-none rounded-lg p-3 bg-white dark:bg-[#1E1E2D]
+  }
+}
+
+.tagify {
+  .tagify__tag {
+    .tagify__tag-text {
+      @apply text-black dark:text-[#1a080f]
+    }
+  }
+}

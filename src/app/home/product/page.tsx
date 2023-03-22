@@ -4,10 +4,9 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { MyDropzone } from "../file-upload/FileUpload";
 import { ReactQuillEditor } from "../react-quill/ReactQuill";
 import { GoPencil, GoTrashcan } from "react-icons/go";
-import TagifyInput from "../tagify/Tagify";
 import CurrencyInput from "react-currency-input-field";
 import { NumericFormat } from "react-number-format";
-import { SideBar } from "../sidebar/SideBar";
+import TagifyInput from "../tagify/Tagify";
 // import { useAppDispatch, useAppSelector } from "../../hooks";
 // import {  setNum1, setNum2 } from "../../store/product/product.slice";
 interface AvatarFile extends File {
@@ -211,7 +210,7 @@ export default function PageProduct() {
                     Thẻ tags
                   </h2>
                   <div>
-                    {/* <TagifyInput
+                    <TagifyInput
                       whitelist={[
                         "new",
                         "trending",
@@ -220,7 +219,7 @@ export default function PageProduct() {
                         "selling fast",
                         "last 10",
                       ]}
-                    /> */}
+                    />
                   </div>
                   <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                     Thêm sản phẩm vào thẻ tags.
@@ -259,7 +258,7 @@ export default function PageProduct() {
                     >
                       Mô tả sản phẩm
                     </label>
-                    {/* <ReactQuillEditor /> */}
+                    <ReactQuillEditor />
                     <p className="mt-2 text-sm text-gray-500">
                       Đặt mô tả cho sản phẩm
                     </p>
@@ -512,9 +511,9 @@ export default function PageProduct() {
                             </div>
                             <div className="col-span-2">
                               <div className="flex justify-between gap-6">
-                                {/* <TagifyInput
+                                <TagifyInput
                                   whitelist={["chiếc", "đơn", "xl", "red"]}
-                                /> */}
+                                />
                                 <button className="text-center p-3 bg-red-500 text-white rounded-full">
                                   <GoTrashcan className="text-sm" />
                                 </button>
