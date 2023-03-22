@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import { HiMenuAlt1, HiMoon, HiSun } from "react-icons/hi";
 interface PropsetState {
-    collapsed: boolean;
-    setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
-  }
-  export const NavBar = (props: PropsetState) => {
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export const NavBar = (props: PropsetState) => {
   const [colorTheme, setColorTheme] = useState<string | null>(null);
   useEffect(() => {
     const prefersDarkMode = window.matchMedia(
@@ -141,6 +141,6 @@ interface PropsetState {
           </div>
         </div>
       </nav>
-      </>
+    </>
   );
 };
