@@ -8,21 +8,24 @@ import CurrencyInput from "react-currency-input-field";
 import { NumericFormat } from "react-number-format";
 import TagifyInput from "../tagify/Tagify";
 import { useThemeStore } from "@/store/colorTheme/colorTheme";
-// import { useAppDispatch, useAppSelector } from "../../hooks";
-// import {  setNum1, setNum2 } from "../../store/product/product.slice";
+import useProductStore from "@/store/product/product";
 interface AvatarFile extends File {
   preview: string;
 }
 export default function PageProduct() {
-  // const dispatch = useAppDispatch();
   const { colorTheme } = useThemeStore();
+
+  const [checked, setChecked] = useState(false);
+  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.currentTarget.checked);
+  };
+
   const [avatar, setAvatar] = useState<AvatarFile | null>(null);
   useEffect(() => {
     return () => {
       avatar && URL.revokeObjectURL(avatar.preview);
     };
   }, [avatar]);
-
   const handlePreviewAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -33,32 +36,24 @@ export default function PageProduct() {
     }
   };
   const handleRemoveAvatar = () => {
-    setAvatar(null);
+     setAvatar(null);
   };
-  const [checked, setChecked] = useState(false);
-  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.currentTarget.checked);
-  };
-  // const { num1, num2, profit, profitMargin } = useAppSelector(
-  //   (state) => state.product
-  // );
-  // const memoizedProductValues = useMemo(
-  //   () => ({ num1, num2, profit, profitMargin }),
-  //   [num1, num2, profit, profitMargin]
-  // );
-  // console.log(memoizedProductValues);
-  
-  // const handleNum1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const newValue = Number(e.target.value);
-  //   dispatch(setNum1(newValue));
-  // };
 
-  // const handleNum2Change = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const newValue = Number(e.target.value);
-  //   dispatch(setNum2(newValue));
-  // };
- console.log(colorTheme);
- 
+  const {setNum1, setNum2, num1, num2, profit, profitMargin} = useProductStore((state) => state)
+  const handleNum1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(e.target.value);
+    setNum1(newValue)
+  };
+  const handleNum2Change = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(e.target.value);
+    setNum2(newValue)
+  }; 
+  const memoizedProductValues = useMemo(
+    () => ({ num1, num2, profit, profitMargin }),
+    [num1, num2, profit, profitMargin]
+  );
+  console.log(memoizedProductValues);
+
   return (
     <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
       <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
@@ -169,6 +164,7 @@ export default function PageProduct() {
                       id="avatar-upload"
                       type="file"
                       className="hidden"
+                      key={avatar?.preview}
                       onChange={handlePreviewAvatar}
                     />
                   </div>
@@ -315,9 +311,9 @@ export default function PageProduct() {
                           className="block w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
                           customInput={CurrencyInput}
                           intlConfig={{ locale: "vi-VN", currency: "VND" }}
-                          // value={0}
-                          // defaultValue={0}
-                          // onChange={handleNum1Change}
+                          value={num1}
+                          defaultValue={0}
+                          onChange={handleNum1Change}
                           groupSeparator={","}
                           disableAbbreviations
                         />
@@ -375,9 +371,9 @@ export default function PageProduct() {
                           className="block w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
                           customInput={CurrencyInput}
                           intlConfig={{ locale: "vi-VN", currency: "VND" }}
-                          // value={0}
-                          // defaultValue={0}
-                          // onChange={handleNum2Change}
+                          value={num2}
+                          defaultValue={0}
+                          onChange={handleNum2Change}
                           groupSeparator={","}
                           disableAbbreviations
                         />
@@ -396,7 +392,7 @@ export default function PageProduct() {
                             displayType="text"
                             disabled
                             className="block border-none w-36 p-0 py-2 dark:text-white dark:bg-[#1E1E2D]"
-                            // value={profitMargin}
+                            value={profitMargin}
                             decimalScale={3}
                             suffix={"%"}
                           />
@@ -416,7 +412,7 @@ export default function PageProduct() {
                             customInput={CurrencyInput}
                             intlConfig={{ locale: "vi-VN", currency: "VND" }}
                             groupSeparator={","}
-                            // value={profit}
+                            value={profit}
                             disableAbbreviations
                           />
                         </div>
