@@ -7,6 +7,7 @@ import { GoPencil, GoTrashcan } from "react-icons/go";
 import CurrencyInput from "react-currency-input-field";
 import { NumericFormat } from "react-number-format";
 import TagifyInput from "../tagify/Tagify";
+import { useThemeStore } from "@/store/colorTheme/colorTheme";
 // import { useAppDispatch, useAppSelector } from "../../hooks";
 // import {  setNum1, setNum2 } from "../../store/product/product.slice";
 interface AvatarFile extends File {
@@ -14,6 +15,7 @@ interface AvatarFile extends File {
 }
 export default function PageProduct() {
   // const dispatch = useAppDispatch();
+  const { colorTheme } = useThemeStore();
   const [avatar, setAvatar] = useState<AvatarFile | null>(null);
   useEffect(() => {
     return () => {
@@ -55,6 +57,8 @@ export default function PageProduct() {
   //   const newValue = Number(e.target.value);
   //   dispatch(setNum2(newValue));
   // };
+ console.log(colorTheme);
+ 
   return (
     <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
       <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
@@ -151,11 +155,9 @@ export default function PageProduct() {
                       </>
                     ) : (
                       <img
-                        className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover dark:invert dark:shadow-none"
-                        src={"/blank-image.svg"} 
+                        className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover "
+                        src={`${colorTheme === "dark" ? "/blank-image-dark.svg" : "/blank-image.svg" }`} 
                       />
-                      // <div className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover bg-[url('/blank-image.svg')] dark:bg-[url('/icon.jpg')]">
-                      // </div>
                     )}
                     <label
                       htmlFor="avatar-upload"

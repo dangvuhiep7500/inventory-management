@@ -1,35 +1,16 @@
-import React, { createContext, useEffect, useState } from "react";
+import { useThemeStore } from "@/store/colorTheme/colorTheme";
+import React, { useEffect, useState } from "react";
 import { HiMenuAlt1, HiMoon, HiSun } from "react-icons/hi";
+
 interface PropsetState {
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const NavBar = (props: PropsetState) => {
-  const [colorTheme, setColorTheme] = useState<string | null>(null);
+  const { colorTheme, toggleTheme, initTheme } = useThemeStore();
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    const storedColorTheme = localStorage.getItem("color-theme");
-    if (storedColorTheme === "dark" || (!storedColorTheme && prefersDarkMode)) {
-      setColorTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setColorTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
+    initTheme()
   }, []);
-  function handleThemeToggle() {
-    if (colorTheme === "light") {
-      setColorTheme("dark");
-      localStorage.setItem("color-theme", "dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setColorTheme("light");
-      localStorage.setItem("color-theme", "light");
-      document.documentElement.classList.remove("dark");
-    }
-  }
   return (
     <>
       <nav className="sticky px-2 top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-[#1E1E2D] dark:border-gray-700">
@@ -56,7 +37,7 @@ export const NavBar = (props: PropsetState) => {
                 <button
                   type="button"
                   className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-xl p-2.5"
-                  onClick={handleThemeToggle}
+                  onClick={toggleTheme}
                 >
                   {colorTheme === "dark" ? (
                     <HiSun aria-label="Currently dark mode" />
