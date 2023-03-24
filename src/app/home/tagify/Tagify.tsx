@@ -5,6 +5,8 @@ interface TagifyInputProps {
     maxTags?: number;
     maxDropdownItems?: number;
     dropdownEnabled?: number;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    value?: string;
   }
 
 export const TagifyInput: React.FC<TagifyInputProps> = ({

@@ -12,6 +12,10 @@ import useProductStore from "@/store/product/product";
 interface AvatarFile extends File {
   preview: string;
 }
+type InputValue = {
+  id: number;
+  value: string;
+};
 export default function PageProduct() {
   const { colorTheme } = useThemeStore();
 
@@ -52,8 +56,28 @@ export default function PageProduct() {
     () => ({ num1, num2, profit, profitMargin }),
     [num1, num2, profit, profitMargin]
   );
-  console.log(memoizedProductValues);
+  // console.log(memoizedProductValues);
 
+  const [inputFields, setInputFields] = useState<string[]>([""]);
+  const [hasInput, setHasInput] = useState(false);
+  const handleAddInputField = () => {
+    setInputFields([...inputFields, ""]);
+    setHasInput(true);
+  };
+  const handleRemoveInputField = (index: number) => {
+    const updatedInputFields = [...inputFields];
+    updatedInputFields.splice(index, 1);
+    setInputFields(updatedInputFields);
+    if (updatedInputFields.length === 1) {
+      setHasInput(false); 
+    }
+  };
+  const handleInputChange = (index: number, value: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedInputFields = [...inputFields];
+    updatedInputFields[index] = value.target.value;
+    setInputFields(updatedInputFields);
+  };
+  
   return (
     <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
       <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
@@ -151,7 +175,11 @@ export default function PageProduct() {
                     ) : (
                       <img
                         className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover "
-                        src={`${colorTheme === "dark" ? "/blank-image-dark.svg" : "/blank-image.svg" }`} 
+                        src={`${
+                          colorTheme === "dark"
+                            ? "/blank-image-dark.svg"
+                            : "/blank-image.svg"
+                        }`}
                       />
                     )}
                     <label
@@ -186,7 +214,7 @@ export default function PageProduct() {
                     id="countries"
                     className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
                   >
-                    <option >Chọn loại sản phẩm</option>
+                    <option>Chọn loại sản phẩm</option>
                     <option value="US">United States</option>
                     <option value="CA">Canada</option>
                     <option value="FR">France</option>
@@ -490,49 +518,64 @@ export default function PageProduct() {
                           </div>
                         </div>
                         <div className="px-3">
-                          <label
-                            htmlFor="company-website"
-                            className="block mb-2 text-sm font-bold leading-6 text-gray-900 dark:text-white"
-                          >
-                            Thuộc tính 1
-                          </label>
-                          <div className="grid gap-6 mb-2 md:grid-cols-3">
-                            <div className="">
-                              <select
-                                id="countries"
-                                className=" block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
-                              >
-                                <option >Chọn thuộc tính</option>
-                                <option value="US">Kích cỡ</option>
-                                <option value="CA">Loại</option>
-                                <option value="FR">Màu</option>
-                                <option value="FR">Tùy chọn</option>
-                              </select>
-                            </div>
-                            <div className="col-span-2">
-                              <div className="flex justify-between gap-6">
-                                <TagifyInput
-                                  whitelist={["chiếc", "đơn", "xl", "red"]}
-                                />
-                                <button className="text-center p-3 bg-red-500 text-white rounded-full">
-                                  <GoTrashcan className="text-sm" />
-                                </button>
-                              </div>
+                          {inputFields.map((input, index) => (
+                            <div key={index}>
                               <label
                                 htmlFor="company-website"
-                                className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                                className="block mb-2 text-sm font-bold leading-6 text-gray-900 dark:text-white"
                               >
-                                Thêm nhãn đã có
+                                Thuộc tính {index + 1}
                               </label>
+                              <div className="grid gap-6 mb-2 md:grid-cols-3">
+                                <div>
+                                  <select
+                                    id="countries"
+                                    className=" block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                                  >
+                                    <option>Chọn thuộc tính</option>
+                                    <option value="US">Kích cỡ</option>
+                                    <option value="CA">Loại</option>
+                                    <option value="FR">Màu</option>
+                                    <option value="FR">Tùy chọn</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-2">
+                                  <div className="flex justify-between gap-6">
+                                    <TagifyInput
+                                      value={input}
+                                      whitelist={["chiếc", "đơn", "xl", "red"]}
+                                      onChange={(e) =>
+                                        handleInputChange(index, e)
+                                      }
+                                    />
+                                    {hasInput && (
+                                      <a
+                                        onClick={() =>
+                                          handleRemoveInputField(index)
+                                        }
+                                        className="cursor-pointer text-center p-3 bg-red-500 text-white rounded-full"
+                                      >
+                                        <GoTrashcan className="text-sm" />
+                                      </a>
+                                    )}
+                                  </div>
+                                  <label
+                                    htmlFor="company-website"
+                                    className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                                  >
+                                    Thêm nhãn đã có
+                                  </label>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <button
-                            type="submit"
-                            className="rounded-md font-medium duration-200 bg-sky-50 dark:bg-[#212E48] py-2 px-5 text-sm text-sky-500 shadow-sm hover:bg-sky-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                          ))}
+                          <a
+                            onClick={handleAddInputField}
+                            className=" cursor-pointer rounded-md font-medium duration-200 bg-sky-50 dark:bg-[#212E48] py-2 px-5 text-sm text-sky-500 shadow-sm hover:bg-sky-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                           >
                             <span className="mr-2">+</span>
                             Thêm thuộc tính khác
-                          </button>
+                          </a>
                         </div>
                       </>
                     )}

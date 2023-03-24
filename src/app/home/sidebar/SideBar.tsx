@@ -94,7 +94,7 @@ export const SideBar = (props: PropsetState) => {
             {Menus.map((Menu, index) => (
               <li
                 key={index}
-                className={`${Menu.gap ? "mt-9 pt-4 space-y-2 border-t border-gray-200 dark:border-gray-700" : "mt-2"} ${
+                className={`${Menu.gap ? "mt-9 pt-4 space-y-2 border-t border-gray-700" : "mt-2"} ${
                   index === 0 && "bg-light-white"
                 } `}
               >
