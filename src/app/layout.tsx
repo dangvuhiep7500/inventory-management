@@ -1,4 +1,7 @@
+"use client";
+
 import '@/styles/globals.scss';
+import { SessionProvider } from "next-auth/react"
 export const metadata = {
   title: 'Home',
   description: 'Welcome to Next.js',
@@ -19,7 +22,9 @@ export default function RootLayout({
         />
       </head>
       <body>
+      <SessionProvider>
         {children}
+      </SessionProvider>
         {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script> */}
         <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
       </body>
