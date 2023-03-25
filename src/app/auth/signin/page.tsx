@@ -23,7 +23,7 @@ function Page() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isLoading, error } = useAuthStore((state) => (state));
+  const { isLoading, error, login } = useAuthStore((state) => (state));
 
   const formik = useFormik({
     initialValues,
@@ -31,7 +31,7 @@ function Page() {
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       try {
         // await dispatch(userLogin(values));
-        // await login(username, password);
+        await login(values.username, values.password);
       } catch (error) {
         setStatus(error);
       }

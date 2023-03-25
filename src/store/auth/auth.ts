@@ -1,55 +1,44 @@
 import {create} from "zustand";
-import { combine } from "zustand/middleware";
+import Cookies from "js-cookie";
 
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  userName: string;
-}
-
-interface AuthState {
+type AuthActions = {
   isLoading: boolean;
-  user: User | null;
   error: string | null;
-}
-
-const initialState: AuthState = {
-  isLoading: false,
-  user: null,
-  error: null,
+  refreshToken: string | null;
+  login: (username: string,password: string ) => void;
 };
 
-export const useAuthStore = create<AuthState>(
+export const useAuthStore = create<AuthActions>(
    (set) => ({
     isLoading: false,
-    user: null,
+    refreshToken: null,
     error: null,
     login: async (username: string, password: string) => {
       set({ isLoading: true, error: null });
       try {
+        const token = Cookies.get("accessToken");
         const res = await fetch("https://localhost:5000/api/Account/login", {
           method: "POST",
           body: JSON.stringify({ username, password }),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
-        console.log(res);
         if (res.status === 200) {
           const data = await res.json();
-          set({ isLoading: false, user: data.user, error: null });
+          set({ isLoading: false, refreshToken: data.token, error: null });
+          Cookies.set("accessToken", data.token);
         } else {
           const data = await res.json();
-          set({ isLoading: false, user: null, error: data.message });
+          set({ isLoading: false, refreshToken: null, error: data.message });
         }
       } catch (error: any) {
-        set({ isLoading: false, user: null, error: error.message });
+        set({ isLoading: false, refreshToken: null, error: error.message });
       }
     },
     logout: () => {
-      set({ isLoading: false, user: null, error: null });
+      set({ isLoading: false, refreshToken: null, error: null });
     },
   })
 );
