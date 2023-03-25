@@ -4,14 +4,14 @@ import Cookies from "js-cookie";
 type AuthActions = {
   isLoading: boolean;
   error: string | null;
-  refreshToken: string | null;
+  accessToken: string | null;
   login: (username: string,password: string ) => void;
 };
 
 export const useAuthStore = create<AuthActions>(
    (set) => ({
     isLoading: false,
-    refreshToken: null,
+    accessToken: null,
     error: null,
     login: async (username: string, password: string) => {
       set({ isLoading: true, error: null });
@@ -27,18 +27,18 @@ export const useAuthStore = create<AuthActions>(
         });
         if (res.status === 200) {
           const data = await res.json();
-          set({ isLoading: false, refreshToken: data.token, error: null });
+          set({ isLoading: false, accessToken: data.token, error: null });
           Cookies.set("accessToken", data.token);
         } else {
           const data = await res.json();
-          set({ isLoading: false, refreshToken: null, error: data.message });
+          set({ isLoading: false, accessToken: null, error: data.message });
         }
       } catch (error: any) {
-        set({ isLoading: false, refreshToken: null, error: error.message });
+        set({ isLoading: false, accessToken: null, error: error.message });
       }
     },
     logout: () => {
-      set({ isLoading: false, refreshToken: null, error: null });
+      set({ isLoading: false, accessToken: null, error: null });
     },
   })
 );

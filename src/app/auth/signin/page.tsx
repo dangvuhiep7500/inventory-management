@@ -20,8 +20,6 @@ const initialValues = {
   password: "string",
 };
 function Page() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   const { isLoading, error, login } = useAuthStore((state) => (state));
 
@@ -30,7 +28,6 @@ function Page() {
     validationSchema: loginSchema,
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       try {
-        // await dispatch(userLogin(values));
         await login(values.username, values.password);
       } catch (error) {
         setStatus(error);
