@@ -3,7 +3,6 @@ import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import { User } from "next-auth";
 import Cookies from "js-cookie";
-
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -27,15 +26,17 @@ export const authOptions: NextAuthOptions = {
         }
         const token = Cookies.get("accessToken");
         const { username, password } = credentials as { username: string, password:string} ;
-        const res = await fetch("https://localhost:5000/api/Account/login", {
+        const res = await fetch("https://localhost:5000/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            username: "string",
+            password: "string",
+          }),
         });
-        
         const user = await res.json();
         if (!res.ok) {
           throw new Error(user.message)
@@ -43,16 +44,28 @@ export const authOptions: NextAuthOptions = {
         if (res.ok && user) {
         Cookies.set("accessToken", user.token);
         console.log(user);
-            return user;
-        } else 
-            return null;
+        return user;
+        } 
+        return null;
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token from a provider.
+      session.user = token;
 
-  pages: {
-    signIn: "/auth/signin",
+      return session;
+    },
   },
+  
+  pages: {
+    signIn: "auth/signin",
+  },
+  secret: process.env.NEXTAUTH_URL,
 };
 
 export default NextAuth(authOptions);

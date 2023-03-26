@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
 import { useRouter } from 'next/router';
 import { getCsrfToken, getSession, signIn, useSession } from "next-auth/react";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -22,7 +23,7 @@ const initialValues = {
   password: "string",
 };
 
-function Page() {
+function Page({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { isLoading, error, login } = useAuthStore((state) => (state));
   const formik = useFormik({
     initialValues,
@@ -34,8 +35,6 @@ function Page() {
           username: values.username,
           password: values.password,
           redirect: false,
-          // callbackUrl: "/auth/signin"
-          callbackUrl: `${window.location.origin}`,
         });
       } catch (error) {
         setStatus(error);
@@ -49,7 +48,9 @@ function Page() {
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col gap-4 w-[25rem]"
+        action="/api/auth/callback/credentials"
       >
+         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <h2 className="font-medium text-3xl text-dark text-center mb-5">
           Signin to Your Account
         </h2>
@@ -193,11 +194,11 @@ function Page() {
     </>
   );
 }
-export async function getServerSideProps(context:any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       csrfToken: await getCsrfToken(context),
     },
-  };
+  }
 }
 export default Page;
