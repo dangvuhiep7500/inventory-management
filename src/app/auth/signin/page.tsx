@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FormEventHandler, useRef, useState } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
-import { signIn } from "next-auth/react";
+import { useRouter } from 'next/router';
+import { getCsrfToken, getSession, signIn, useSession } from "next-auth/react";
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -20,10 +21,9 @@ const initialValues = {
   username: "string",
   password: "string",
 };
+
 function Page() {
-
   const { isLoading, error, login } = useAuthStore((state) => (state));
-
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
@@ -33,8 +33,9 @@ function Page() {
         await signIn("credentials", {
           username: values.username,
           password: values.password,
-          redirect: true,
-          callbackUrl: "/auth/signup",
+          redirect: false,
+          // callbackUrl: "/auth/signin"
+          callbackUrl: `${window.location.origin}`,
         });
       } catch (error) {
         setStatus(error);
@@ -43,12 +44,10 @@ function Page() {
       setStatus(" ");
     },
   });
-
   return (
     <>
       <form
         onSubmit={formik.handleSubmit}
-        action=""
         className="flex flex-col gap-4 w-[25rem]"
       >
         <h2 className="font-medium text-3xl text-dark text-center mb-5">
@@ -124,8 +123,8 @@ function Page() {
           className="font-bold bg-sky-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
           type="submit"
         >
-          {/* <span className="indicator-label">Login</span> */}
-          {!isLoading && <span className="indicator-label">Login</span>}
+          <span className="indicator-label">Login</span>
+          {/* {!isLoading && <span className="indicator-label">Login</span>}
             {isLoading && (
               <span>
                 <svg
@@ -147,7 +146,7 @@ function Page() {
                 </svg>
                 Loading...
               </span>
-            )}
+            )} */}
         </button>
       </form>
 
@@ -193,5 +192,12 @@ function Page() {
       </div>
     </>
   );
+}
+export async function getServerSideProps(context:any) {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  };
 }
 export default Page;

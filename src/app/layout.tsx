@@ -2,19 +2,17 @@
 
 import '@/styles/globals.scss';
 import { SessionProvider } from "next-auth/react"
-export const metadata = {
-  title: 'Home',
-  description: 'Welcome to Next.js',
-};
+
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
 }) {
   return (
     <html lang="en">
       <head>
+        <title>Home</title>
         <link rel="shortcut icon" href="/icon.jpg" type="image/x-icon" />
         <link
           rel="stylesheet"
