@@ -1,5 +1,7 @@
-import Head from "next/head";
-import React, { FC } from "react";
+import React from "react";
+export const metadata = {
+  title: 'Account',
+};
 export default function AuthLayout({
   children,
 }: {

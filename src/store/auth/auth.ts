@@ -1,5 +1,6 @@
 import {create} from "zustand";
 import Cookies from "js-cookie";
+import axios, { AxiosError } from "axios";
 
 type AuthActions = {
   isLoading: boolean;
@@ -15,26 +16,23 @@ export const useAuthStore = create<AuthActions>(
     error: null,
     login: async (username: string, password: string) => {
       set({ isLoading: true, error: null });
+      const token = Cookies.get("accessToken");
       try {
-        const token = Cookies.get("accessToken");
-        const res = await fetch("https://localhost:5000/api/Account/login", {
-          method: "POST",
-          body: JSON.stringify({ username, password }),
+        const {data} = await axios.post("https://localhost:5000/auth/login", 
+        { username, password },
+        {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        });
-        if (res.status === 200) {
-          const data = await res.json();
-          set({ isLoading: false, accessToken: data.token, error: null });
-          Cookies.set("accessToken", data.token);
-        } else {
-          const data = await res.json();
-          set({ isLoading: false, accessToken: null, error: data.message });
         }
-      } catch (error: any) {
-        set({ isLoading: false, accessToken: null, error: error.message });
+      );
+        set({ isLoading: false, accessToken: data.token, error: null });
+        Cookies.set("accessToken", data.token);
+      } catch (error: AxiosError | unknown) {
+        if (axios.isAxiosError(error)) {
+          set({ isLoading: false, accessToken: null, error: error.response?.data?.message || error.message });
+        } 
       }
     },
     logout: () => {

@@ -1,71 +1,82 @@
-import CredentialsProvider from "next-auth/providers/credentials";
-import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
-import { User } from "next-auth";
 import Cookies from "js-cookie";
-export const authOptions: NextAuthOptions = {
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      id: 'credentials',
-      credentials: {
-        username: {
-            label: "Username",
-            type: "text",
-            placeholder: "jsmith",
-          },
-          password: {
-            label: "Password",
-            type: "password",
-          },
-      },
-      async authorize(credentials,req) {
-        const payload = {
-          email: credentials?.username,
-          password: credentials?.password,
-        }
-        const token = Cookies.get("accessToken");
-        const { username, password } = credentials as { username: string, password:string} ;
-        const res = await fetch("https://localhost:5000/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            username: "string",
-            password: "string",
-          }),
-        });
-        const user = await res.json();
-        if (!res.ok) {
-          throw new Error(user.message)
-        }
-        if (res.ok && user) {
-        Cookies.set("accessToken", user.token);
-        console.log(user);
-        return user;
-        } 
-        return null;
-      },
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
-    },
-    async session({ session, token, user }) {
-      // Send properties to the client, like an access_token from a provider.
-      session.user = token;
+// import CredentialsProvider from "next-auth/providers/credentials";
+// import NextAuth from "next-auth";
+// import type { NextAuthOptions } from "next-auth";
+// import { User } from "next-auth";
+// import Providers from 'next-auth/providers';
+// import { randomBytes, randomUUID } from "crypto";
 
-      return session;
-    },
-  },
+// export const authOptions: NextAuthOptions = {
+//   providers: [
+//     CredentialsProvider({
+//       id: 'login',
+//       name: 'Login',
+//       credentials: {
+//         username: {
+//           label: "Username",
+//           type: "text",
+//           placeholder: "jsmith",
+//         },
+//         password: {
+//           label: "Password",
+//           type: "password",
+//         },
+//       },
+//       async authorize(credentials, req) {
+//         const token = Cookies.get("accessToken");
+//         const { username, password } = credentials as {
+//           username: string;
+//           password: string;
+//         };
+//         try {
+//           const res = await fetch(`http://localhost:5000/auth/login`, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//               Authorization: `Bearer ${token}`,
+//             },
+//             body: JSON.stringify({
+//               username,
+//               password,
+//             }),
+//           });
+//           const user = await res.json();
+//           if (!res.ok) {
+//             throw new Error(user.message);
+//           }
+//           if (res.ok && user) {
+//             Cookies.set("accessToken", user.token);
+//             console.log(user);
+//             return user;
+//           }
+//         }catch(error: any){
+//           console.log(error);
+//         }
+//         return null;
+//       },
+//     }),
+//   ],
+//   session: {
+//     strategy: "jwt",
+//     generateSessionToken: () => {
+//       return randomUUID?.() ?? randomBytes(32).toString("hex")
+//     }
+//   },
+//   secret: process.env.SECRET,
+//   callbacks: {
+//     async jwt({ token, user }) {
+//       return { ...token, ...user };
+//     },
+//     async session({ session, token, user }) {
+//       session.user = token;
+
+//       return session;
+//     },
+//   },
   
-  pages: {
-    signIn: "auth/signin",
-  },
-  secret: process.env.NEXTAUTH_URL,
-};
+//   pages: {
+//     signIn: "/auth/signin",
+//   },
+// };
 
-export default NextAuth(authOptions);
+// export default NextAuth(authOptions);

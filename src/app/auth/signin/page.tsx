@@ -1,13 +1,10 @@
 "use client";
 
-import React, { FormEventHandler, useRef, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
-import { useRouter } from 'next/router';
-import { getCsrfToken, getSession, signIn, useSession } from "next-auth/react";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -23,19 +20,14 @@ const initialValues = {
   password: "string",
 };
 
-function Page({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function Page() {
   const { isLoading, error, login } = useAuthStore((state) => (state));
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       try {
-        // await login(values.username, values.password);
-        await signIn("credentials", {
-          username: values.username,
-          password: values.password,
-          redirect: false,
-        });
+        await login(values.username, values.password);
       } catch (error) {
         setStatus(error);
       }
@@ -43,14 +35,13 @@ function Page({ csrfToken }: InferGetServerSidePropsType<typeof getServerSidePro
       setStatus(" ");
     },
   });
+  
   return (
     <>
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col gap-4 w-[25rem]"
-        action="/api/auth/callback/credentials"
       >
-         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <h2 className="font-medium text-3xl text-dark text-center mb-5">
           Signin to Your Account
         </h2>
@@ -124,8 +115,7 @@ function Page({ csrfToken }: InferGetServerSidePropsType<typeof getServerSidePro
           className="font-bold bg-sky-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
           type="submit"
         >
-          <span className="indicator-label">Login</span>
-          {/* {!isLoading && <span className="indicator-label">Login</span>}
+          {!isLoading && <span className="indicator-label">Login</span>}
             {isLoading && (
               <span>
                 <svg
@@ -147,7 +137,7 @@ function Page({ csrfToken }: InferGetServerSidePropsType<typeof getServerSidePro
                 </svg>
                 Loading...
               </span>
-            )} */}
+            )}
         </button>
       </form>
 
@@ -194,11 +184,5 @@ function Page({ csrfToken }: InferGetServerSidePropsType<typeof getServerSidePro
     </>
   );
 }
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  }
-}
+
 export default Page;
