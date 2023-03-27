@@ -1,7 +1,7 @@
-import { Alert } from 'flowbite-react';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaFileUpload } from 'react-icons/fa';
+import Image from 'next/legacy/image';
 export function MyDropzone() {
   const [preview, setPreview] = useState<File[]>([]);
   const handleDrop = (acceptedFiles: File[]) => {
@@ -21,9 +21,10 @@ export function MyDropzone() {
     onDrop: handleDrop
   });
   const previews = preview.map((file, index) => (
-    <div key={file.name} className="relative" >
-      <img
-        className="block p-2.5 h-40 w-40  object-cover"
+    <div key={file.name} className="relative p-2.5" >
+      <Image
+        width={200}
+        height={200}
         src={URL.createObjectURL(file)}
         alt={file.name}
       />

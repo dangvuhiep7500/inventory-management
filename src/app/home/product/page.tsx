@@ -9,13 +9,10 @@ import { NumericFormat } from "react-number-format";
 import TagifyInput from "../tagify/Tagify";
 import { useThemeStore } from "@/store/colorTheme/colorTheme";
 import useProductStore from "@/store/product/product";
+import Image from "next/legacy/image";
 interface AvatarFile extends File {
   preview: string;
 }
-type InputValue = {
-  id: number;
-  value: string;
-};
 export default function PageProduct() {
   const { colorTheme } = useThemeStore();
 
@@ -161,9 +158,12 @@ export default function PageProduct() {
                   <div className="relative">
                     {avatar ? (
                       <>
-                        <img
-                          className="block rounded-lg  p-2.5 h-48 w-48 object-cover"
+                        <Image
+                          className="block rounded-lg p-2.5 object-cover"
                           src={avatar.preview}
+                          alt=""
+                          width={192}
+                          height={192}
                         />
                         <button
                           onClick={handleRemoveAvatar}

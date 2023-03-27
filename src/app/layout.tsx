@@ -1,6 +1,6 @@
 
 export const metadata = {
-  title: 'Next.js',
+  title: 'NextJs-Home',
   icons: {
     icon: '/icon.jpg',
   },
