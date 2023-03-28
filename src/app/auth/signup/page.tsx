@@ -4,12 +4,13 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import Link from "next/link";
+import { useAuthStore } from "@/store/auth/auth";
 
 const initialValues = {
   firstName: "",
   lastName: "",
   email: "",
-  userName: "",
+  username: "",
   password: "",
   confirmpassword: "",
   acceptTerms: false,
@@ -25,7 +26,7 @@ const registrationSchema = Yup.object().shape({
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Email is required"),
-  userName: Yup.string()
+  username: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Username is required"),
@@ -49,12 +50,13 @@ const registrationSchema = Yup.object().shape({
   acceptTerms: Yup.bool().required("You must accept the terms and conditions"),
 });
 function Page() {
+  const { isLoading, error, successRegister, register } = useAuthStore((state) => (state));
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchema,
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       try {
-        // await dispatch(userRegister(values));
+        register(values)
       } catch (error) {
         setStatus(error);
       }
@@ -73,7 +75,7 @@ function Page() {
         <h2 className="font-medium text-3xl text-dark text-center mb-5">
           Signup to Your Account
         </h2>
-        {/* {errorRegister && (
+        {error && (
           <div
             className="flex p-4 text-sm text-red-800 rounded-lg bg-red-50"
             role="alert"
@@ -92,10 +94,10 @@ function Page() {
               ></path>
             </svg>
             <div>
-              <span className="font-medium">{errorRegister}</span>
+              <span className="font-medium">{error}</span>
             </div>
           </div>
-        )} */}
+        )}
         <div className="grid gap-2 mb-2 md:grid-cols-2">
           <div className="block">
             <label className="block mb-2 text-base font-medium text-dark">
@@ -152,13 +154,13 @@ function Page() {
           </label>
           <input
             placeholder="Username"
-            {...formik.getFieldProps("userName")}
+            {...formik.getFieldProps("username")}
             className="placeholder:text-slate-400 border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             autoComplete="off"
           />
-          {formik.touched.userName && formik.errors.userName && (
+          {formik.touched.username && formik.errors.username && (
             <p className="mt-1 text-sm text-red-600">
-              {formik.errors.userName}
+              {formik.errors.username}
             </p>
           )}
         </div>
@@ -221,8 +223,7 @@ function Page() {
           className="font-bold bg-sky-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
           type="submit"
         >
-          <span>Sign up</span>
-          {/* {!isLoading && <span>Sign up</span>}
+          {!isLoading && <span>Sign up</span>}
           {isLoading && (
             <span>
               <svg
@@ -244,7 +245,7 @@ function Page() {
               </svg>
               Loading...
             </span>
-          )} */}
+          )}
         </button>
       </form>
 

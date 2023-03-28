@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
+import { useRouter } from "next/navigation";
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -21,13 +22,16 @@ const initialValues = {
 };
 
 function Page() {
-  const { isLoading, error, login } = useAuthStore((state) => (state));
+  const { isLoading, error, successLogin, login } = useAuthStore(
+    (state) => state
+  );
+  const router = useRouter();
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       try {
-        await login(values.username, values.password);
+        login(values);
       } catch (error) {
         setStatus(error);
       }
@@ -35,7 +39,11 @@ function Page() {
       setStatus(" ");
     },
   });
-  
+  useEffect(() => {
+    if (successLogin) {
+      router.push("/home/product");
+    }
+  }, [successLogin, router]);
   return (
     <>
       <form
