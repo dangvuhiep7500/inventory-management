@@ -26,7 +26,7 @@ interface ProductState {
   fetchCategories: () => void;
 }
 
-export const useAuthStore = create<ProductState>((set) => ({
+export const useCategoriesStore = create<ProductState>((set) => ({
   categories: [],
   subcategories: [],
   isLoading: false,

@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
+import { useAuthStore } from "../auth/auth";
 // import { Modal } from "antd";
 interface MyAxiosInstance extends AxiosInstance {
   setToken: (token: string) => void;
@@ -30,19 +31,17 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const accessToken = Cookies.get("accessToken");
-      // const refreshToken = store?.getState()?.user?.refreshToken
-      console.log(accessToken);
-      console.log(store?.getState()?.auth?.refreshToken);
-      // Try to refresh the token
+      const refreshToken = useAuthStore.getState().refreshToken
+      console.log(refreshToken);
       try {
         const { data } = await axios.post(
-          "https://localhost:5000/api/Account/refresh-token",
-          { refreshToken: store?.getState()?.auth.refreshToken, accessToken }
+          "https://localhost:5000/auth/refresh-token",
+          { refreshToken: refreshToken, accessToken }
         );
         console.log(data.refreshToken);
         const token = data.accessToken;
         Cookies.set("accessToken", token);
-        store.dispatch(setRefreshToken(data.refreshToken));
+        useAuthStore(data.refreshToken);
         originalRequest.headers.Authorization = `Bearer ${token}`;
         return axios(originalRequest);
       } catch (error) {

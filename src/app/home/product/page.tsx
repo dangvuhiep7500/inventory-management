@@ -10,6 +10,8 @@ import TagifyInput from "../tagify/Tagify";
 import { useThemeStore } from "@/store/colorTheme/colorTheme";
 import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
+import { useCategoriesStore } from "@/store/category/category";
+import { useAuthStore } from "@/store/auth/auth";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -74,7 +76,19 @@ export default function PageProduct() {
     updatedInputFields[index] = value.target.value;
     setInputFields(updatedInputFields);
   };
+  const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
+    (state) => state
+  );
+  const { refreshToken } = useAuthStore(
+    (state) => state
+  );
+  console.log(refreshToken);
   
+    useEffect(() => {
+      fetchCategories();
+    }, []);
+    // console.log(categories );
+    
   return (
     <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
       <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
