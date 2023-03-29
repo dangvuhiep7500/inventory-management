@@ -28,6 +28,7 @@ type AuthActions = {
     username,
     password,
   }: RegisterUser) => void;
+  setRefreshToken: (refreshToken: string | null) => void;
   clear: () => void;
 };
 export const useAuthStore = create<AuthActions>()(
@@ -36,12 +37,12 @@ export const useAuthStore = create<AuthActions>()(
       isLoading: false,
       successLogin: false,
       successRegister: false,
-      refreshToken:null,
+      refreshToken: null,
       error: null,
       login: async ({ username, password }: AuthUser) => {
         set({ isLoading: true, error: null });
-        const token = Cookies.get("accessToken");
         try {
+          const token = Cookies.get("accessToken")
           const { data } = await axios.post(
             "https://localhost:5000/auth/login",
             { username, password },
@@ -49,11 +50,11 @@ export const useAuthStore = create<AuthActions>()(
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
+                withCredentials: true
               },
             }
           );
-          set({ successLogin: true, error: null, refreshToken: data.refreshToken });
-          console.log(data.refreshToken);
+          set({isLoading: true, successLogin: true, error: null, refreshToken: data.refreshToken });
           Cookies.set("accessToken", data.token);
         } catch (error: AxiosError | unknown) {
           if (axios.isAxiosError(error)) {
@@ -93,6 +94,9 @@ export const useAuthStore = create<AuthActions>()(
           }
         }
       },
+      setRefreshToken: (refreshToken) => {
+        set({ refreshToken });
+      },
       clear: () => {
         set({ isLoading: false, error: null });
         localStorage.clear();
@@ -102,7 +106,7 @@ export const useAuthStore = create<AuthActions>()(
     {
       name: "user-storage", 
       storage: createJSONStorage(() => localStorage), 
-      partialize: (state) => ({ successLogin: state.successLogin }),
+      partialize: (state) => ({ successLogin: state.successLogin}),
     }
   )
 );

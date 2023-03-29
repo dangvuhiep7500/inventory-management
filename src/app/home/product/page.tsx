@@ -79,11 +79,7 @@ export default function PageProduct() {
   const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
     (state) => state
   );
-  const { refreshToken } = useAuthStore(
-    (state) => state
-  );
-  console.log(refreshToken);
-  
+  // console.log(useAuthStore.getState().refreshToken);
     useEffect(() => {
       fetchCategories();
     }, []);

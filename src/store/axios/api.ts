@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 import { useAuthStore } from "../auth/auth";
-// import { Modal } from "antd";
 interface MyAxiosInstance extends AxiosInstance {
   setToken: (token: string) => void;
 }
@@ -27,41 +26,33 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    await new Promise((resolve) => setTimeout(resolve, 150));
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+      // const refreshToken = useAuthStore.getState().refreshToken
+      // console.log(refreshToken1);
       const accessToken = Cookies.get("accessToken");
-      const refreshToken = useAuthStore.getState().refreshToken
+      const refreshToken = Cookies.get("refreshToken");
       console.log(refreshToken);
       try {
         const { data } = await axios.post(
           "https://localhost:5000/auth/refresh-token",
-          { refreshToken: refreshToken, accessToken }
+          { refreshToken: refreshToken, accessToken },
         );
-        console.log(data.refreshToken);
+        // console.log(data.refreshToken);
         const token = data.accessToken;
         Cookies.set("accessToken", token);
-        useAuthStore(data.refreshToken);
+        Cookies.set("refreshToken", data.refreshToken);
+        // useAuthStore.getState().setRefreshToken(data.refreshToken);
         originalRequest.headers.Authorization = `Bearer ${token}`;
         return axios(originalRequest);
       } catch (error) {
-        // Modal.error({
-        //   title: "Phiên đăng nhập của bạn đã hết hạn",
-        //   content: "Vui lòng đăng nhập lại.",
-        //   onOk: () => {
-        //     localStorage.removeItem("persist:user");
-        //     localStorage.clear();
-        //     Cookies.remove("accessToken");
-        //     Cookies.remove("refreshToken");
-        //     window.location.href = "/";
-        //   },
-        // });
         alert("Phiên đăng nhập của bạn đã hết hạn.Vui lòng đăng nhập lại.");
         localStorage.removeItem("persist:user");
         localStorage.clear();
         Cookies.remove("accessToken");
         Cookies.remove("refreshToken");
-        window.location.href = "/";
+        window.location.href = "/auth/signin";
         }
     }
     return Promise.reject(error);

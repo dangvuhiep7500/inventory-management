@@ -34,8 +34,9 @@ export const useCategoriesStore = create<ProductState>((set) => ({
   fetchCategories: async () => {
     set({ isLoading: true, error: null });
     try {
-      const response = await instance.get<ICategory[]>(
-        "https://localhost:5000/api/Category/GetCategory"
+      const response = await axios.get<ICategory[]>(
+        "https://localhost:5000/api/Category/GetCategory",
+        {withCredentials: true }
       );
       set({ isLoading: false, categories: response.data, error: null });
     } catch (error: AxiosError | unknown) {
