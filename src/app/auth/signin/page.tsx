@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
 import { useRouter } from "next/navigation";
+import { useCategoriesStore } from "@/store/category/category";
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -44,6 +45,7 @@ function Page() {
       router.push("/home/product");
     }
   }, [successLogin, router]);
+    
   return (
     <>
       <form

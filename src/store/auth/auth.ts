@@ -42,19 +42,24 @@ export const useAuthStore = create<AuthActions>()(
       login: async ({ username, password }: AuthUser) => {
         set({ isLoading: true, error: null });
         try {
-          const token = Cookies.get("accessToken")
+          const token = Cookies.get("accessToken");
           const { data } = await axios.post(
             "https://localhost:5000/auth/login",
             { username, password },
             {
+              withCredentials: true,
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
-                withCredentials: true
               },
             }
           );
-          set({isLoading: true, successLogin: true, error: null, refreshToken: data.refreshToken });
+          set({
+            isLoading: true,
+            successLogin: true,
+            error: null,
+            refreshToken: data.refreshToken,
+          });
           Cookies.set("accessToken", data.token);
         } catch (error: AxiosError | unknown) {
           if (axios.isAxiosError(error)) {
@@ -104,9 +109,9 @@ export const useAuthStore = create<AuthActions>()(
       },
     }),
     {
-      name: "user-storage", 
-      storage: createJSONStorage(() => localStorage), 
-      partialize: (state) => ({ successLogin: state.successLogin}),
+      name: "user-storage",
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ successLogin: state.successLogin }),
     }
   )
 );
