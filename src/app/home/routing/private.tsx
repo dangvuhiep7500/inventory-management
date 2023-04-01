@@ -1,20 +1,16 @@
 import { useAuthStore } from "@/store/auth/auth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const isAuthentication = useAuthStore((state) => state.successLogin);
-
   useEffect(() => {
     if (!isAuthentication) {
-      router.push("/auth/signin"); // redirect to login page if user is not authenticated
+      router.push("/auth/signin");
     }
+    setIsLoading(true);
   }, [isAuthentication, router]);
-
-  if (isAuthentication) {
-    return <>{children}</>;
-  } else {
-    return null;
-  }
+  return isLoading ? <>{children}</> : null;
 };

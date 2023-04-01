@@ -1,15 +1,15 @@
-
 export const metadata = {
-  title: 'NextJs-Home',
+  title: "NextJs-Home",
   icons: {
-    icon: '/icon.jpg',
+    icon: "/icon.jpg",
   },
 };
-import '@/styles/globals.scss';
+import Script from "next/script";
+import "@/styles/globals.scss";
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode,
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -19,15 +19,18 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
         />
       </head>
-      <head/>
       <body>
-      {children}
-      {/* <SessionProvider>
         {children}
-      </SessionProvider> */}
-        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script> */}
-        <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="../path/to/flowbite/dist/flowbite.min.js"
+        strategy="beforeInteractive"
+      />
       </body>
+     
     </html>
   );
 }
