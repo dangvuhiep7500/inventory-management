@@ -84,6 +84,7 @@ export default function PageProduct() {
     }, []);
     console.log(categories);
   return (
+    <>
     <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
       <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
         Add Product
@@ -610,5 +611,6 @@ export default function PageProduct() {
         </div>
       </div>
     </div>
+    </>
   );
 };
