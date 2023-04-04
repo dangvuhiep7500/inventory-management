@@ -20,5 +20,7 @@ module.exports = {
     },
     filter: ['responsive', 'hover', 'focus', 'dark'],
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [
+    require("flowbite/plugin")
+  ],
 }

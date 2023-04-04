@@ -106,6 +106,7 @@ export const useAuthStore = create<AuthActions>()(
         set({ isLoading: false, error: null });
         localStorage.clear();
         Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
       },
     }),
     {

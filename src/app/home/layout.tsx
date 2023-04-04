@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavBar } from "./header/NavBar";
 import { SideBar } from "./sidebar/SideBar";
 import { PrivateRoute } from "./routing/private";
 import Script from "next/script";
+
 export default function HomeLayout({
   children,
 }: {

@@ -19,18 +19,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
         />
       </head>
-      <body>
-        {children}
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"
-        strategy="beforeInteractive"
-      />
-      <Script
-        src="../path/to/flowbite/dist/flowbite.min.js"
-        strategy="beforeInteractive"
-      />
-      </body>
-     
+      <body>{children}</body>
     </html>
   );
 }

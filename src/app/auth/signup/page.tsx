@@ -106,7 +106,7 @@ function Page() {
             <input
               placeholder="Fisrtname"
               {...formik.getFieldProps("firstName")}
-              className="placeholder:text-slate-400  border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="placeholder:text-slate-400  border border-gray-200 bg-gray-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               autoComplete="off"
             />
             {formik.touched.firstName && formik.errors.firstName && (
@@ -122,7 +122,7 @@ function Page() {
             <input
               placeholder="Lastname"
               {...formik.getFieldProps("lastName")}
-              className="placeholder:text-slate-400 border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="placeholder:text-slate-400 border border-gray-200 bg-gray-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               autoComplete="off"
             />
             {formik.touched.lastName && formik.errors.lastName && (
@@ -139,7 +139,7 @@ function Page() {
           <input
             placeholder="Email"
             {...formik.getFieldProps("email")}
-            className="placeholder:text-slate-400 border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="placeholder:text-slate-400 border border-gray-200 bg-gray-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             autoComplete="off"
           />
           {formik.touched.email && formik.errors.email && (
@@ -155,7 +155,7 @@ function Page() {
           <input
             placeholder="Username"
             {...formik.getFieldProps("username")}
-            className="placeholder:text-slate-400 border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="placeholder:text-slate-400 border border-gray-200 bg-gray-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             autoComplete="off"
           />
           {formik.touched.username && formik.errors.username && (
@@ -172,7 +172,7 @@ function Page() {
             type="password"
             placeholder="Password"
             {...formik.getFieldProps("password")}
-            className="placeholder:text-slate-400 border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="placeholder:text-slate-400 border border-gray-200 bg-gray-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             autoComplete="off"
           />
           {formik.touched.password && formik.errors.password && (
@@ -189,7 +189,7 @@ function Page() {
             type="password"
             placeholder="Confirm Password"
             {...formik.getFieldProps("confirmpassword")}
-            className="placeholder:text-slate-400 border border-gray-200 bg-zinc-100  text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="placeholder:text-slate-400 border border-gray-200 bg-gray-100 text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             autoComplete="off"
           />
           {formik.touched.confirmpassword && formik.errors.confirmpassword && (
@@ -220,7 +220,7 @@ function Page() {
           </label>
         </div>
         <button
-          className="font-bold bg-sky-500 rounded-xl text-white py-2 hover:scale-105 duration-300"
+          className="font-bold bg-blue-500 hover:bg-blue-600 rounded-xl text-white py-2 hover:scale-105 duration-300"
           type="submit"
         >
           {!isLoading && <span>Sign up</span>}
