@@ -14,7 +14,7 @@ export default function HomeLayout({
   const [collapsed, setCollapsed] = useState(true);
   return (
     <>
-      <PrivateRoute>
+      {/* <PrivateRoute> */}
         <div className="flex h-screen w-full flex-col">
           <div className="flex h-screen overflow-hidden bg-[#1E1E2D]">
             <SideBar collapsed={collapsed} />
@@ -24,7 +24,7 @@ export default function HomeLayout({
             </div>
           </div>
         </div>
-      </PrivateRoute>
+      {/* </PrivateRoute> */}
     </>
   );
 }

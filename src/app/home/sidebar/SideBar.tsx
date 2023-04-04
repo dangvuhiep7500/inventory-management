@@ -1,76 +1,140 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
-import { HiChartPie} from "react-icons/hi";
+import { HiChartPie } from "react-icons/hi";
 import { ImStatsBars2 } from "react-icons/im";
 import { FaMoneyCheck, FaShippingFast } from "react-icons/fa";
 import { AiFillGift, AiFillSetting, AiTwotoneTag } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { TbAppsFilled } from "react-icons/tb";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Sidebar } from "flowbite-react";
+import { FaHome, FaUser, FaCog } from "react-icons/fa";
 interface PropsetState {
   collapsed: boolean;
 }
+const icons = [
+  HiChartPie,
+  AiOutlineShoppingCart,
+  FaShippingFast,
+  AiTwotoneTag,
+  BiUserCircle,
+  FaMoneyCheck,
+  AiFillGift,
+  ImStatsBars2,
+  TbAppsFilled,
+  AiFillSetting,
+];
 export const SideBar = (props: PropsetState) => {
-    const iconClassName = "flex-shrink-0 h-6 w-6 cursor-pointer text-gray-300";
-    const Menus = [
-      {
-        title: "Tổng quan",
-        icon: <HiChartPie className={iconClassName} />,
-      },
-      {
-        title: "Đơn Hàng",
-        icon: <AiOutlineShoppingCart className={iconClassName} />,
-        options: ["Tất cả đơn hàng", "Đơn hàng nhập", "Chưa hoàn tất"],
-        dropId: "dropdown-cart",
-      },
-      {
-        title: "Vận Chuyển",
-        icon: <FaShippingFast className={iconClassName} />,
-        options: ["Tổng quan", "Vận chuyển", "Quản lý thu hộ"],
-        dropId: "dropdown-ship",
-      },
-      {
-        title: "Sản Phẩm",
-        icon: <AiTwotoneTag className={iconClassName} />,
-        options: ["Tất cả sản phẩm", "Nhóm sản phẩm", "Tồn kho"],
-        dropId: "dropdown-product",
-      },
-      { title: "Khách Hàng", icon: <BiUserCircle className={iconClassName} /> },
-      {
-        title: "Số Quỹ",
-        icon: <FaMoneyCheck className={iconClassName} />,
-        options: ["Số quỹ", "Công nợ"],
-        dropId: "dropdown-fund",
-      },
-      { title: "Khuyến Mãi", icon: <AiFillGift className={iconClassName} /> },
-      { title: "Thống Kê", icon: <ImStatsBars2 className={iconClassName} /> },
-      { title: "Ứng Dụng", icon: <TbAppsFilled className={iconClassName} /> },
-      {
-        title: "Setting",
-        icon: <AiFillSetting className={iconClassName} />,
-        gap: true,
-      },
-    ];
-    const [isHovered, setIsHovered] = useState(false);
-    const [subMenuOpen, setSubMenuOpen] = useState(
-      Array(Menus.length).fill(false)
-    );
-    const handleMouseEnter = () => {
-      setIsHovered(true);
-    };
-  
-    const handleMouseLeave = () => {
-      setIsHovered(false);
-    };
+  const iconClassName = "flex-shrink-0 h-6 w-6 cursor-pointer text-gray-300";
+  const Menus = [
+    {
+      title: "Tổng quan",
+      icon: <HiChartPie className={iconClassName} />,
+    },
+    {
+      title: "Đơn Hàng",
+      icon: <AiOutlineShoppingCart className={iconClassName} />,
+      options: ["Tất cả đơn hàng", "Đơn hàng nhập", "Chưa hoàn tất"],
+      dropId: "dropdown-cart",
+    },
+    {
+      title: "Vận Chuyển",
+      icon: <FaShippingFast className={iconClassName} />,
+      options: ["Tổng quan", "Vận chuyển", "Quản lý thu hộ"],
+      dropId: "dropdown-ship",
+    },
+    {
+      title: "Sản Phẩm",
+      icon: <AiTwotoneTag className={iconClassName} />,
+      options: ["Tất cả sản phẩm", "Nhóm sản phẩm", "Tồn kho"],
+      dropId: "dropdown-product",
+    },
+    { title: "Khách Hàng", icon: <BiUserCircle className={iconClassName} /> },
+    {
+      title: "Số Quỹ",
+      icon: <FaMoneyCheck className={iconClassName} />,
+      options: ["Số quỹ", "Công nợ"],
+      dropId: "dropdown-fund",
+    },
+    { title: "Khuyến Mãi", icon: <AiFillGift className={iconClassName} /> },
+    { title: "Thống Kê", icon: <ImStatsBars2 className={iconClassName} /> },
+    { title: "Ứng Dụng", icon: <TbAppsFilled className={iconClassName} /> },
+    {
+      title: "Setting",
+      icon: <AiFillSetting className={iconClassName} />,
+      gap: true,
+    },
+  ];
+  const [isHovered, setIsHovered] = useState(false);
+  const [subMenuOpen, setSubMenuOpen] = useState(
+    Array(Menus.length).fill(false)
+  );
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
     <>
+      <Sidebar
+        id="logo-sidebar"
+        aria-label="Sidebar"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`${
+          props.collapsed ? "w-72" : "w-20"
+        } duration-300 hover:w-72`}
+      >
+        <Sidebar.Items className="relative top-0 left-0 z-40 h-full overflow-y-auto overflow-x-hidden">
+          <Sidebar.ItemGroup>
+            <div
+              className={`flex px-4 py-3 gap-x-3 items-center border-b border-gray-700 border-dashed`}
+            >
+              <img
+                src="/img/logo.png"
+                className={`cursor-pointer duration-500 ${
+                  props.collapsed && "rotate-[360deg]"
+                }`}
+              />
+              <h1
+                className={`text-gray-400 origin-left font-medium text-xl duration-200 ${
+                  !props.collapsed && "overflow-hidden"
+                }`}
+              >
+                Designer
+              </h1>
+            </div>
+            {Menus.map((Menu, index) => (
+              <Sidebar.Item
+                key={index}
+                className={`${
+                  Menu.gap
+                    ? "mt-9 pt-4 space-y-2 border-t border-gray-700"
+                    : "mt-2"
+                } ${index === 0 && "bg-light-white"} `}
+                href="#"
+                icon={icons[index]}
+              >
+                {Menu.title}
+              </Sidebar.Item>
+            ))}
+            <Sidebar.Collapse icon={HiChartPie} label="E-commerce">
+              <Sidebar.Item href="#">Products</Sidebar.Item>
+            </Sidebar.Collapse>
+          </Sidebar.ItemGroup>
+        </Sidebar.Items>
+      </Sidebar>
       <aside
         id="logo-sidebar"
         aria-label="Sidebar"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`${props.collapsed ? "w-72" : "w-20"} duration-300 hover:w-72`}
+        className={`${
+          props.collapsed ? "w-72" : "w-20"
+        } duration-300 hover:w-72`}
       >
         <div className="relative top-0 left-0 z-40 h-full overflow-y-auto overflow-x-hidden">
           <div
@@ -94,9 +158,11 @@ export const SideBar = (props: PropsetState) => {
             {Menus.map((Menu, index) => (
               <li
                 key={index}
-                className={`${Menu.gap ? "mt-9 pt-4 space-y-2 border-t border-gray-700" : "mt-2"} ${
-                  index === 0 && "bg-light-white"
-                } `}
+                className={`${
+                  Menu.gap
+                    ? "mt-9 pt-4 space-y-2 border-t border-gray-700"
+                    : "mt-2"
+                } ${index === 0 && "bg-light-white"} `}
               >
                 <a
                   href={`${Menu.options ? "#" : "/"}`}
