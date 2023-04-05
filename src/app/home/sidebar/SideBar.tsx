@@ -50,22 +50,82 @@ export const SideBar = (props: PropsetState) => {
       options: ["Tất cả sản phẩm", "Nhóm sản phẩm", "Tồn kho"],
       dropId: "dropdown-product",
     },
-    { title: "Khách Hàng", icon: <BiUserCircle className={iconClassName} /> },
+    {
+      title: "Khách Hàng",
+      icon: <BiUserCircle className={iconClassName} />,
+    },
     {
       title: "Số Quỹ",
       icon: <FaMoneyCheck className={iconClassName} />,
       options: ["Số quỹ", "Công nợ"],
       dropId: "dropdown-fund",
     },
-    { title: "Khuyến Mãi", icon: <AiFillGift className={iconClassName} /> },
-    { title: "Thống Kê", icon: <ImStatsBars2 className={iconClassName} /> },
-    { title: "Ứng Dụng", icon: <TbAppsFilled className={iconClassName} /> },
+    {
+      title: "Khuyến Mãi",
+      icon: <AiFillGift className={iconClassName} />,
+    },
+    {
+      title: "Thống Kê",
+      icon: <ImStatsBars2 className={iconClassName} />,
+    },
+    {
+      title: "Ứng Dụng",
+      icon: <TbAppsFilled className={iconClassName} />,
+    },
     {
       title: "Setting",
       icon: <AiFillSetting className={iconClassName} />,
       gap: true,
     },
   ];
+  const sidebarItems = [
+    { href: "#", icon: HiChartPie, label: "Tổng quan" },
+    {
+      href: "#",
+      icon: AiOutlineShoppingCart,
+      label: "Đơn hàng",
+      children: [
+        { href: "#", label: "Tất cả đơn hàng" },
+        { href: "#", label: "Đơn hàng nhập" },
+        { href: "#", label: "Chưa hoàn tất" },
+      ],
+    },
+    {
+      href: "#",
+      icon: FaShippingFast,
+      label: "Vận chuyển",
+      children: [
+        { href: "#", label: "Tổng quan" },
+        { href: "#", label: "Vận chuyển" },
+        { href: "#", label: "Quản lý thu hộ" },
+      ],
+    },
+    {
+      href: "#",
+      icon: AiTwotoneTag,
+      label: "Sản phẩm",
+      children: [
+        { href: "#", label: "Tất cả sản phẩm" },
+        { href: "#", label: "Nhóm sản phẩm" },
+        { href: "#", label: "Tồn kho" },
+      ],
+    },
+    { href: "#", icon: BiUserCircle, label: "Khách hàng" },
+    {
+      href: "#",
+      icon: FaMoneyCheck,
+      label: "Số Quỹ",
+      children: [
+        { href: "#", label: "Số quỹ" },
+        { href: "#", label: "Công nợ" },
+      ],
+    },
+    { href: "#", icon: AiFillGift, label: "Khuyến mãi" },
+    { href: "#", icon: ImStatsBars2, label: "Thống kê" },
+    { href: "#", icon: TbAppsFilled, label: "Ứng dụng" },
+    { href: "#", icon: AiFillSetting, label: "Setting",gap: true },
+  ];
+
   const [isHovered, setIsHovered] = useState(false);
   const [subMenuOpen, setSubMenuOpen] = useState(
     Array(Menus.length).fill(false)
@@ -84,14 +144,15 @@ export const SideBar = (props: PropsetState) => {
         aria-label="Sidebar"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`${
-          props.collapsed ? "w-72" : "w-20"
-        } duration-300 hover:w-72`}
+        // className={`${
+        //   props.collapsed ? "w-72" : "w-20"
+        // } duration-300 hover:w-72 `}
+        collapsed={!props.collapsed}
       >
-        <Sidebar.Items className="relative top-0 left-0 z-40 h-full overflow-y-auto overflow-x-hidden">
+        <Sidebar.Items>
           <Sidebar.ItemGroup>
             <div
-              className={`flex px-4 py-3 gap-x-3 items-center border-b border-gray-700 border-dashed`}
+              className={`flex px-4 py-1 gap-x-3 items-center border-b border-gray-700 border-dashed`}
             >
               <img
                 src="/img/logo.png"
@@ -106,24 +167,34 @@ export const SideBar = (props: PropsetState) => {
               >
                 Designer
               </h1>
+              
             </div>
-            {Menus.map((Menu, index) => (
-              <Sidebar.Item
-                key={index}
-                className={`${
-                  Menu.gap
-                    ? "mt-9 pt-4 space-y-2 border-t border-gray-700"
-                    : "mt-2"
-                } ${index === 0 && "bg-light-white"} `}
-                href="#"
-                icon={icons[index]}
-              >
-                {Menu.title}
-              </Sidebar.Item>
-            ))}
-            <Sidebar.Collapse icon={HiChartPie} label="E-commerce">
-              <Sidebar.Item href="#">Products</Sidebar.Item>
-            </Sidebar.Collapse>
+            {sidebarItems.map((item, index) =>
+              item.children ? (
+                <Sidebar.Collapse
+                  key={index}
+                  icon={item.icon}
+                  label={item.label}
+                >
+                  {item.children.map((child, childIndex) => (
+                    <Sidebar.Item key={childIndex} href={child.href}>
+                      {child.label}
+                    </Sidebar.Item>
+                  ))}
+                </Sidebar.Collapse>
+              ) : (
+                <Sidebar.Item
+                  className={`${item.gap && "mt-6 border-t border-gray-700"} ${
+                    index === 0 && "bg-light-white"
+                  } `}
+                  key={index}
+                  href={item.href}
+                  icon={item.icon}
+                >
+                  {item.label}
+                </Sidebar.Item>
+              )
+            )}
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
