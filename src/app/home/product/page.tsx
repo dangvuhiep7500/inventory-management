@@ -12,6 +12,7 @@ import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
 import { useCategoriesStore } from "@/store/category/category";
 import { useAuthStore } from "@/store/auth/auth";
+import { useRouter } from "next/navigation";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -79,6 +80,7 @@ export default function PageProduct() {
   const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
     (state) => state
   );
+  const router = useRouter();
     useEffect(() => {
       fetchCategories();
     }, []);

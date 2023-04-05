@@ -21,7 +21,21 @@ const initialValues = {
   username: "string",
   password: "string",
 };
-
+export async function getServerSideProps() {
+  const successLogin = useAuthStore.getState().successLogin;
+  console.log(successLogin);
+  if (successLogin) {
+    return {
+      redirect: {
+        destination: '/home/product',
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
 function Page() {
   const { isLoading, error, successLogin, login } = useAuthStore(
     (state) => state
@@ -41,11 +55,11 @@ function Page() {
     },
   });
 
-  // useEffect(() => {
-  //   if (successLogin) {
-  //     router.replace("/home/product");
-  //   }
-  // }, [successLogin, router]);
+  useEffect(() => {
+    if (successLogin) {
+      router.replace("/home/product");
+    }
+  }, [successLogin, router]);
     
   return (
     <>

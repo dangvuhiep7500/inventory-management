@@ -175,6 +175,9 @@ export const SideBar = (props: PropsetState) => {
                   key={index}
                   icon={item.icon}
                   label={item.label}
+                  theme={{
+                    // inner:"h-full overflow-y-auto overflow-x-hidden rounded bg-white py-4 px-3 dark:bg-gray-800"
+                  }}
                 >
                   {item.children.map((child, childIndex) => (
                     <Sidebar.Item key={childIndex} href={child.href}>
