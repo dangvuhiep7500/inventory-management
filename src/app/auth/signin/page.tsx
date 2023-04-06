@@ -57,9 +57,9 @@ function Page() {
 
   useEffect(() => {
     if (successLogin) {
-      router.replace("/home/product");
+      window.location.replace("/home/product");
     }
-  }, [successLogin, router]);
+  }, [successLogin]);
     
   return (
     <>
