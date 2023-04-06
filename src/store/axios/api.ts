@@ -42,7 +42,7 @@ instance.interceptors.response.use(
         if (axios.isAxiosError(error)) {
           console.log(error.response?.data?.message || error.message);
         }
-        alert("Phiên đăng nhập của bạn đã hết hạn.Vui lòng đăng nhập lại.");
+        // alert("Phiên đăng nhập của bạn đã hết hạn.Vui lòng đăng nhập lại.");
         localStorage.removeItem("persist:user");
         localStorage.clear();
         Cookies.remove("accessToken");
