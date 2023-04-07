@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MyDropzone } from "../file-upload/FileUpload";
 import { ReactQuillEditor } from "../react-quill/ReactQuill";
 import { GoPencil, GoTrashcan } from "react-icons/go";
@@ -11,8 +11,6 @@ import { useThemeStore } from "@/store/colorTheme/colorTheme";
 import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
 import { useCategoriesStore } from "@/store/category/category";
-import { useAuthStore } from "@/store/auth/auth";
-import { useRouter } from "next/navigation";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -52,11 +50,6 @@ export default function PageProduct() {
     const newValue = Number(e.target.value);
     setNum2(newValue)
   }; 
-  const memoizedProductValues = useMemo(
-    () => ({ num1, num2, profit, profitMargin }),
-    [num1, num2, profit, profitMargin]
-  );
-  // console.log(memoizedProductValues);
 
   const [inputFields, setInputFields] = useState<string[]>([""]);
   const [hasInput, setHasInput] = useState(false);
@@ -80,7 +73,6 @@ export default function PageProduct() {
   const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
     (state) => state
   );
-  const router = useRouter();
     useEffect(() => {
       fetchCategories();
     }, []);

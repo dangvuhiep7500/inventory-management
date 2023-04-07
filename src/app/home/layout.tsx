@@ -1,11 +1,11 @@
 "use client";
 
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavBar } from "./header/NavBar";
 import { SideBar } from "./sidebar/SideBar";
 import { useAuthStore } from "@/store/auth/auth";
 import { useRouter } from "next/navigation";
-import Script from "next/script";
+import Cookies from "js-cookie";
 
 export default function HomeLayout({
   children,
@@ -15,19 +15,19 @@ export default function HomeLayout({
   const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
-  const successLogin = useAuthStore(
-    (state) => state.successLogin
-  );
+  const successLogin = useAuthStore((state) => state.successLogin);
+  const accessToken = Cookies.get("accessToken");
   useEffect(() => {
-    if (!successLogin) {
+    if (!successLogin && !accessToken) {
       router.replace("/auth/signin");
     } else {
       setLoggedIn(true);
     }
   }, [successLogin, router]);
-    return (
-      <>
-        {loggedIn && (
+  return (
+    <>
+      {loggedIn && (
+        <>
           <div className="flex h-screen w-full flex-col">
             <div className="flex h-screen overflow-hidden bg-[#1E1E2D]">
               <SideBar collapsed={collapsed} />
@@ -37,7 +37,8 @@ export default function HomeLayout({
               </div>
             </div>
           </div>
-        )}
-      </>
-    );
+        </>
+      )}
+    </>
+  );
 }

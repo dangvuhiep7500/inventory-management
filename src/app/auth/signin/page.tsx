@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
-import { useRouter } from "next/navigation";
-import { useCategoriesStore } from "@/store/category/category";
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -21,26 +19,10 @@ const initialValues = {
   username: "string",
   password: "string",
 };
-export async function getServerSideProps() {
-  const successLogin = useAuthStore.getState().successLogin;
-  console.log(successLogin);
-  if (successLogin) {
-    return {
-      redirect: {
-        destination: '/home/product',
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {},
-  };
-}
 function Page() {
   const { isLoading, error, successLogin, login } = useAuthStore(
     (state) => state
   );
-  const router = useRouter();
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
