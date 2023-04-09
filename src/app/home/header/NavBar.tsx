@@ -11,10 +11,13 @@ interface PropsetState {
 }
 export const NavBar = (props: PropsetState) => {
   const { colorTheme, toggleTheme, initTheme } = useThemeStore();
+  const { currentUser,userName, userEmail } = useAuthStore((state) => state);
   useEffect(() => {
     initTheme();
+    currentUser();
   }, []);
   const clear = useAuthStore((state) => state.clear);
+
   return (
     <>
       <nav className="sticky px-2 top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-[#1E1E2D] dark:border-gray-700">
@@ -58,7 +61,7 @@ export const NavBar = (props: PropsetState) => {
                     rounded={true}
                   >
                     <div className="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white">
-                    Bonnie Green
+                    {userName}
                     <svg
                       className="w-4 h-4 mx-1.5"
                       aria-hidden="true"
@@ -79,9 +82,9 @@ export const NavBar = (props: PropsetState) => {
                 inline={true}
               >
                 <Dropdown.Header>
-                  <span className="block text-sm">Bonnie Green</span>
+                  <span className="block text-sm">{userName}</span>
                   <span className="block truncate text-sm font-medium">
-                    name@flowbite.com
+                    {userEmail}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item>Dashboard</Dropdown.Item>

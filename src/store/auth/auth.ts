@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import Cookies from "js-cookie";
 import axios, { AxiosError } from "axios";
+import instance from "../axios/api";
+import { type } from "os";
 interface RegisterUser {
   firstName: string;
   lastName: string;
@@ -12,6 +14,11 @@ interface RegisterUser {
 interface AuthUser {
   username: string;
   password: string;
+}
+type CurrentUser = {
+  userName: string;
+  userEmail: string;
+  currentUser: () => void;
 }
 
 type AuthActions = {
@@ -31,7 +38,7 @@ type AuthActions = {
   setRefreshToken: (refreshToken: string | null) => void;
   clear: () => void;
 };
-export const useAuthStore = create<AuthActions>()(
+export const useAuthStore = create<AuthActions & CurrentUser>()(
   persist(
     (set) => ({
       isLoading: false,
@@ -39,6 +46,8 @@ export const useAuthStore = create<AuthActions>()(
       successRegister: false,
       refreshToken: null,
       error: null,
+      userName: "",
+      userEmail: "",
       login: async ({ username, password }: AuthUser) => {
         set({ isLoading: true, error: null });
         try {
@@ -94,6 +103,22 @@ export const useAuthStore = create<AuthActions>()(
             set({
               isLoading: false,
               successRegister: false,
+              error: error.response?.data?.message || error.message,
+            });
+          }
+        }
+      },
+      currentUser: async () => {
+        set({ isLoading: true, error: null });
+        try {
+          const response = await instance.get(
+            "https://localhost:5000/auth/currentuser"
+          );
+          set({ userName: response.data.userName, userEmail: response.data.userEmail, error: null });
+        } catch (error: AxiosError | unknown) {
+          if (axios.isAxiosError(error)) {
+            set({
+              isLoading: false,
               error: error.response?.data?.message || error.message,
             });
           }
