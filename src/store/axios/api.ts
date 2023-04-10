@@ -33,16 +33,16 @@ instance.interceptors.response.use(
         const { data } = await axios.post(
           "https://localhost:5000/auth/refresh-token",
           { accessToken, withCredentials: true }
-        );
-        const token = data.accessToken;
-        Cookies.set("accessToken", token);
-        originalRequest.headers.Authorization = `Bearer ${token}`;
+          );
+          const token = data.accessToken;
+          Cookies.set("accessToken", token);
+          originalRequest.headers.Authorization = `Bearer ${token}`;
         return axios(originalRequest);
       } catch (error: AxiosError | unknown) {
         if (axios.isAxiosError(error)) {
           console.log(error.response?.data?.message || error.message);
         }
-        // alert("Phiên đăng nhập của bạn đã hết hạn.Vui lòng đăng nhập lại.");
+        alert("Phiên đăng nhập của bạn đã hết hạn.Vui lòng đăng nhập lại.");
         localStorage.removeItem("persist:user");
         localStorage.clear();
         Cookies.remove("accessToken");

@@ -11,6 +11,7 @@ import { useThemeStore } from "@/store/colorTheme/colorTheme";
 import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
 import { useCategoriesStore } from "@/store/category/category";
+import { useUserStore } from "@/store/auth/user";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -73,10 +74,14 @@ export default function PageProduct() {
   const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
     (state) => state
   );
-    useEffect(() => {
-      fetchCategories();
-    }, []);
-    console.log(categories);
+  const { currentUser,userName, userEmail } = useUserStore((state) => state);
+    // useEffect(() => {
+      // fetchCategories();
+      // currentUser();
+    //   Promise.all([currentUser(), fetchCategories()]);
+    // }, [fetchCategories,currentUser]);
+   
+    console.log(categories,userName, userEmail);
   return (
     <>
       <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">

@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/store/auth/auth";
+import { useUserStore } from "@/store/auth/user";
 import { useThemeStore } from "@/store/colorTheme/colorTheme";
 import { Avatar, Dropdown } from "flowbite-react";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { HiMenuAlt1, HiMoon, HiSun } from "react-icons/hi";
 
@@ -11,13 +11,11 @@ interface PropsetState {
 }
 export const NavBar = (props: PropsetState) => {
   const { colorTheme, toggleTheme, initTheme } = useThemeStore();
-  const { currentUser,userName, userEmail } = useAuthStore((state) => state);
+  const { currentUser,userName, userEmail } = useUserStore((state) => state);
   useEffect(() => {
     initTheme();
-    currentUser();
   }, []);
   const clear = useAuthStore((state) => state.clear);
-
   return (
     <>
       <nav className="sticky px-2 top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-[#1E1E2D] dark:border-gray-700">
