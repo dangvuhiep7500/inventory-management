@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
+import { useSession, signIn, signOut } from "next-auth/react"
 const loginSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -19,6 +20,7 @@ const initialValues = {
   username: "string",
   password: "string",
 };
+
 function Page() {
   const { isLoading, error, successLogin, login } = useAuthStore(
     (state) => state
@@ -29,6 +31,13 @@ function Page() {
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       try {
         login(values);
+      //  const res =  await signIn("credentials", {
+      //     username: values.username,
+      //     password: values.password,
+      //     redirect: false,
+      //     // callbackUrl: "/home/product",
+      //   });
+      // console.log(res);
       } catch (error) {
         setStatus(error);
       }

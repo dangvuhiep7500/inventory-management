@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { useEffect, useState } from "react";
 import { NavBar } from "./header/NavBar";
@@ -6,6 +6,7 @@ import { SideBar } from "./sidebar/SideBar";
 import { useAuthStore } from "@/store/auth/auth";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import AuthContext from "./AuthContext";
 
 export default function HomeLayout({
   children,
@@ -28,6 +29,7 @@ export default function HomeLayout({
     <>
       {loggedIn && (
         <>
+         {/* <AuthContext> */}
           <div className="flex h-screen w-full flex-col">
             <div className="flex h-screen overflow-hidden bg-[#1E1E2D]">
               <SideBar collapsed={collapsed} />
@@ -37,6 +39,7 @@ export default function HomeLayout({
               </div>
             </div>
           </div>
+          {/* </AuthContext> */}
         </>
       )}
     </>
