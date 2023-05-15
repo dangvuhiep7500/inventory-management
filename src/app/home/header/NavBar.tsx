@@ -4,7 +4,8 @@ import { useThemeStore } from "@/store/colorTheme/colorTheme";
 import { Avatar, Dropdown } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { HiMenuAlt1, HiMoon, HiSun } from "react-icons/hi";
-
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation";
 interface PropsetState {
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +17,10 @@ export const NavBar = (props: PropsetState) => {
     initTheme();
   }, []);
   const clear = useAuthStore((state) => state.clear);
+  const { data: session} = useSession();
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/auth/signin' });
+  };
   return (
     <>
       <nav className="sticky px-2 top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-[#1E1E2D] dark:border-gray-700">
@@ -59,7 +64,7 @@ export const NavBar = (props: PropsetState) => {
                     rounded={true}
                   >
                     <div className="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white">
-                    {userName}
+                    {session!.user.name}
                     <svg
                       className="w-4 h-4 mx-1.5"
                       aria-hidden="true"
@@ -80,18 +85,16 @@ export const NavBar = (props: PropsetState) => {
                 inline={true}
               >
                 <Dropdown.Header>
-                  <span className="block text-sm">{userName}</span>
+                  <span className="block text-sm">{session?.user.name}</span>
                   <span className="block truncate text-sm font-medium">
-                    {userEmail}
+                  {session?.user.email}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item>Dashboard</Dropdown.Item>
                 <Dropdown.Item>Settings</Dropdown.Item>
                 <Dropdown.Item>Earnings</Dropdown.Item>
                 <Dropdown.Divider />
-                <a href="/auth/signin">
-                <Dropdown.Item onClick={() => clear()}>Sign out</Dropdown.Item>
-                </a>
+                <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
               </Dropdown>
             </div>
           </div>

@@ -4,9 +4,11 @@ export const metadata = {
     icon: "/icon.jpg",
   },
 };
+import { SessionProvider } from "next-auth/react"
 import "@/styles/globals.scss";
 import FlowbiteContext from "@/context/FlowbiteContext";
 import { Inter } from "next/font/google";
+import ProvidersWrapper from "./ProvidersWrapper";
 const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
@@ -20,7 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <FlowbiteContext>{children}</FlowbiteContext>
+        <FlowbiteContext>
+      <ProvidersWrapper>
+          {children}
+        </ProvidersWrapper>
+          </FlowbiteContext>
       </body>
     </html>
   );

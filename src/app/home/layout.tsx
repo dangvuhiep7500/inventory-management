@@ -7,7 +7,7 @@ import { useAuthStore } from "@/store/auth/auth";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import AuthContext from "./AuthContext";
-
+import { useSession, signIn, signOut } from "next-auth/react"
 export default function HomeLayout({
   children,
 }: {
@@ -18,16 +18,28 @@ export default function HomeLayout({
   const [collapsed, setCollapsed] = useState(true);
   const successLogin = useAuthStore((state) => state.successLogin);
   const accessToken = Cookies.get("accessToken");
+  const { data: session,status } = useSession();
+  // useEffect(() => {
+  //   if (!successLogin && !accessToken) {
+  //     router.replace("/auth/signin");
+  //   } else {
+  //     setLoggedIn(true);
+  //   }
+  // }, [successLogin, router]);
   useEffect(() => {
-    if (!successLogin && !accessToken) {
+    if (status ==="unauthenticated") {
       router.replace("/auth/signin");
-    } else {
-      setLoggedIn(true);
     }
-  }, [successLogin, router]);
+     else {
+      setLoggedIn(true);
+     }
+  }, [status]);
+  // if (status === "loading") {
+  //   return <div>Loading...</div>
+  // }
   return (
     <>
-      {loggedIn && (
+      {session && (
         <>
          {/* <AuthContext> */}
           <div className="flex h-screen w-full flex-col">
@@ -41,7 +53,7 @@ export default function HomeLayout({
           </div>
           {/* </AuthContext> */}
         </>
-      )}
+     )} 
     </>
   );
 }

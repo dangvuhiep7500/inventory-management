@@ -2,10 +2,11 @@ import Cookies from "js-cookie";
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 import { User } from "next-auth";
 import Providers from 'next-auth/providers';
 import { randomBytes, randomUUID } from "crypto";
-
+import { rejects } from "assert";
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -13,8 +14,8 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const token = Cookies.get("accessToken");
-        const { username, password } = credentials as {
-          username: string;
+        const { email, password } = credentials as {
+          email: string;
           password: string;
         };
         try {
@@ -25,9 +26,10 @@ export const authOptions: NextAuthOptions = {
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-              username,
+              email,
               password,
             }),
+            
           });
           const user = await res.json();
           if (!res.ok) {
@@ -44,23 +46,29 @@ export const authOptions: NextAuthOptions = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
+      // clientId: "54895963759-q9kgmif028h34ppsjvcm2oo50679sto7.apps.googleusercontent.com",
+      // clientSecret: "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"
+     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
-  secret: process.env.SECRET,
-  callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
-    },
-    async session({ session, token, user }) {
-      session.user = token;
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/auth/signin",
-  },
+  // session: {
+  //   strategy: "jwt",
+  // },
+  // secret: process.env.SECRET,
+  // callbacks: {
+  //   async jwt({ token, user }) {
+  //     return { ...token, ...user };
+  //   },
+  //   async session({ session, token, user }) {
+  //     session.user = token;
+  //     return session;
+  //   },
+  // },
+  // pages: {
+  //   signIn: "/auth/signin",
+  // },
 };
 
 export default NextAuth(authOptions);
