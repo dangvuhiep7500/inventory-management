@@ -80,6 +80,10 @@ export default function PageProduct() {
       // currentUser();
     //   Promise.all([currentUser(), fetchCategories()]);
     // }, [fetchCategories,currentUser]);
+    useEffect(() => {
+      fetchCategories();
+      // currentUser();
+    }, [fetchCategories,currentUser]);
    
     console.log(categories,userName, userEmail);
   return (

@@ -7,6 +7,7 @@ import { User } from "next-auth";
 import Providers from 'next-auth/providers';
 import { randomBytes, randomUUID } from "crypto";
 import { rejects } from "assert";
+import https from 'https';
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -18,19 +19,21 @@ export const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
+        const agent = new https.Agent({ rejectUnauthorized: false });
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),// Replace with the request body, if needed
+          agent: agent, // Pass the agent as a separate property
+        };
         try {
-          const res = await fetch(`https://localhost:5000/auth/login`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              email,
-              password,
-            }),
-            
-          });
+          const res = await fetch(`https://localhost:5000/auth/login`,requestOptions);
           const user = await res.json();
           if (!res.ok) {
             throw new Error(user.message);
