@@ -1,20 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
-// import { Inter } from "next/font/google";
-// import Image from "next/image";
-// import { Head } from "next/document";
-// import { Dropdown } from "flowbite-react";
-// import { NextPage } from "next";
-// import { useRouter } from "next/router";
-// const inter = Inter({ subsets: ["latin"] });
-
+import React from "react";
 export default function Home() {
-
   return (
     <>
     <a href="/auth/signin" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a>
-       {/* <header>
+       <header>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                 <a href="https://flowbite.com" className="flex items-center">
@@ -54,9 +45,9 @@ export default function Home() {
                 </div>
             </div>
         </nav>
-    </header> */}
+    </header>
 
-    {/* <section className="bg-white dark:bg-gray-900">
+    <section className="bg-white dark:bg-gray-900">
         <div className="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div className="place-self-center mr-auto lg:col-span-7">
                 <h1 className="mb-4 max-w-2xl text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl dark:text-white">Payments tool for software companies</h1>
@@ -227,9 +218,9 @@ export default function Home() {
                 <a href="#" className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Free trial for 30 days</a>
             </div>
         </div>
-    </section> */}
+    </section>
 
-    {/* <footer className="p-4 bg-gray-50 sm:p-6 dark:bg-gray-800">
+    <footer className="p-4 bg-gray-50 sm:p-6 dark:bg-gray-800">
         <div className="mx-auto max-w-screen-xl">
             <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">
@@ -297,7 +288,7 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    </footer> */}
+    </footer>
     </>
   );
 }

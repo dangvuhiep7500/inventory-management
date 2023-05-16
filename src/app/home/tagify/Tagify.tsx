@@ -30,7 +30,7 @@ export const TagifyInput: React.FC<TagifyInputProps> = ({
       },
     });
     }
-  }, [inputRef]);
+  }, [inputRef,dropdownEnabled,maxDropdownItems,maxTags,whitelist]);
   return <input ref={inputRef} className="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]" name="tags" />;
 };
 

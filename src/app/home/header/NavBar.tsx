@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { HiMenuAlt1, HiMoon, HiSun } from "react-icons/hi";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 interface PropsetState {
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +16,7 @@ export const NavBar = (props: PropsetState) => {
   const { currentUser,userName, userEmail } = useUserStore((state) => state);
   useEffect(() => {
     initTheme();
-  }, []);
+  }, [initTheme]);
   const clear = useAuthStore((state) => state.clear);
   const { data: session} = useSession();
   const handleSignOut = () => {
@@ -32,9 +33,11 @@ export const NavBar = (props: PropsetState) => {
                   className="mr-6 h-6 w-6 cursor-pointer text-gray-600 dark:text-gray-400"
                   onClick={() => props.setCollapsed(!props.collapsed)}
                 />
-                <img
+                <Image
                   src="https://flowbite.com/docs/images/logo.svg"
                   className="h-8 mr-3"
+                  width={30}
+                  height={30}
                   alt="FlowBite Logo"
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">

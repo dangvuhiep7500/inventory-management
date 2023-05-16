@@ -69,7 +69,7 @@ export const SideBar = (props: PropsetState) => {
       >
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-            <Sidebar.Logo href="#" img="/img/logo.png" imgAlt="Flowbite logo">
+            <Sidebar.Logo className="text-white" href="#" img="/img/logo.png" imgAlt="Flowbite logo">
               Flowbite
             </Sidebar.Logo>
             {sidebarItems.map((item, index) =>

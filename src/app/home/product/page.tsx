@@ -185,13 +185,15 @@ export default function PageProduct() {
                           </button>
                         </>
                       ) : (
-                        <img
+                        <Image
                           className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover "
                           src={`${
                             colorTheme === "dark"
                               ? "/blank-image-dark.svg"
                               : "/blank-image.svg"
                           }`}
+                          width={192}
+                          height={192}
                         />
                       )}
                       <label

@@ -2,6 +2,7 @@ import React from "react";
 export const metadata = {
   title: 'Account',
 };
+import Image from "next/image";
 export default function AuthLayout({
   children,
 }: {
@@ -11,9 +12,11 @@ export default function AuthLayout({
     <>
       <section className="bg-[url('/img/14.png')] bg-no-repeat bg-bottom bg-contain bg-fixed bg-gray-200 min-h-screen flex justify-center">
         <div>
-          <img
+          <Image
             alt="Logo"
-            src={"/logo-1.svg"}
+            src="/logo-1.svg"
+            width={300}
+            height={300}
             className="h-auto max-w-lg mx-auto mt-4"
           />
           <div className="bg-white flex shadow-2xl max-w-4xl p-10 mt-12">

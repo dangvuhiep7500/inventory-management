@@ -33,7 +33,7 @@ export default function HomeLayout({
      else {
       setLoggedIn(true);
      }
-  }, [status]);
+  }, [status,router]);
   // if (status === "loading") {
   //   return <div>Loading...</div>
   // }
