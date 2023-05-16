@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Head } from "next/document";
-import { Dropdown } from "flowbite-react";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-const inter = Inter({ subsets: ["latin"] });
+// import { Inter } from "next/font/google";
+// import Image from "next/image";
+// import { Head } from "next/document";
+// import { Dropdown } from "flowbite-react";
+// import { NextPage } from "next";
+// import { useRouter } from "next/router";
+// const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
 
