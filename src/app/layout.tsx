@@ -4,7 +4,6 @@ export const metadata = {
     icon: "/icon.jpg",
   },
 };
-import { SessionProvider } from "next-auth/react"
 import "@/styles/globals.scss";
 import FlowbiteContext from "@/context/FlowbiteContext";
 import { Inter } from "next/font/google";
@@ -23,10 +22,8 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body>
         <FlowbiteContext>
-      <ProvidersWrapper>
-          {children}
-        </ProvidersWrapper>
-          </FlowbiteContext>
+          <ProvidersWrapper>{children}</ProvidersWrapper>
+        </FlowbiteContext>
       </body>
     </html>
   );

@@ -71,21 +71,24 @@ export default function PageProduct() {
     updatedInputFields[index] = value.target.value;
     setInputFields(updatedInputFields);
   };
+
   const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
     (state) => state
   );
   const { currentUser,userName, userEmail } = useUserStore((state) => state);
+
     // useEffect(() => {
       // fetchCategories();
       // currentUser();
     //   Promise.all([currentUser(), fetchCategories()]);
     // }, [fetchCategories,currentUser]);
-    useEffect(() => {
-      fetchCategories();
+
+    // useEffect(() => {
+    //   fetchCategories();
       // currentUser();
-    }, [fetchCategories,currentUser]);
-   
-    console.log(categories,userName, userEmail);
+    // }, [fetchCategories,currentUser]);
+    
+    // console.log(categories,userName, userEmail);
   return (
     <>
       <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
@@ -173,7 +176,7 @@ export default function PageProduct() {
                           <Image
                             className="block rounded-lg p-2.5 object-cover"
                             src={avatar.preview}
-                            alt=""
+                            alt="avatar"
                             width={192}
                             height={192}
                           />
@@ -192,6 +195,7 @@ export default function PageProduct() {
                               ? "/blank-image-dark.svg"
                               : "/blank-image.svg"
                           }`}
+                          alt="image theme"
                           width={192}
                           height={192}
                         />

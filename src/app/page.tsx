@@ -2,47 +2,53 @@
 
 import { Button, Footer, Navbar } from "flowbite-react";
 import React from "react";
-import { BsFacebook,BsInstagram, BsTwitter, BsGithub, BsDribbble } from "react-icons/bs";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  BsFacebook,
+  BsInstagram,
+  BsTwitter,
+  BsGithub,
+  BsDribbble,
+} from "react-icons/bs";
 export default function Home() {
   return (
     <>
-      {/* <a
-        href="/auth/signin"
-        className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-      >
-        Log in
-      </a> */}
       <div className="">
         <nav className="border-gray-200 px-4 lg:px-6 py-2">
           <Navbar className="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg">
-            <Navbar.Brand href="https://flowbite.com/">
-              <img
+            <Navbar.Brand href="/">
+              <Image
                 src="https://flowbite.com/docs/images/logo.svg"
-                className="mr-3 h-6 sm:h-9"
+                className="h-6 sm:h-9"
                 alt="Flowbite Logo"
+                width={64}
+                height={64}
               />
               <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
                 Flowbite
               </span>
             </Navbar.Brand>
             <div className="flex md:order-2">
-              <Button href="/auth/signin">Log In</Button>
+              <Link href={"/auth/signin"}>
+                <Button>Log In</Button>
+              </Link>
               <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-              <Navbar.Link className="text-lg" href="/navbars" active={true}>
+              <Navbar.Link className="text-lg" href="#" >
                 Home
               </Navbar.Link>
-              <Navbar.Link className="text-lg" href="/navbars">
+              <Navbar.Link className="text-lg" href="#">
                 About
               </Navbar.Link>
-              <Navbar.Link className="text-lg" href="/navbars">
+              <Navbar.Link className="text-lg" href="#">
                 Services
               </Navbar.Link>
-              <Navbar.Link className="text-lg" href="/navbars">
+              <Navbar.Link className="text-lg" href="#">
                 Pricing
               </Navbar.Link>
-              <Navbar.Link className="text-lg" href="/navbars">
+              <Navbar.Link className="text-lg" href="#">
                 Contact
               </Navbar.Link>
             </Navbar.Collapse>
@@ -60,7 +66,7 @@ export default function Home() {
               </p>
               <a
                 href="#"
-                className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+                className="inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 focus:ring-primary-900"
               >
                 Get started
                 <svg
@@ -78,15 +84,17 @@ export default function Home() {
               </a>
               <a
                 href="#"
-                className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center  rounded-lg border  hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-white border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center  rounded-lg border  focus:ring-4 text-white border-gray-700 hover:bg-gray-700 focus:ring-gray-800"
               >
                 Speak to Sales
               </a>
             </div>
             <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-              <img
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
+              <Image
+                src="/img/phone.png"
                 alt="mockup"
+                width={617}
+                height={462}
               />
             </div>
           </div>
