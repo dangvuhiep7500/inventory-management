@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Footer, Navbar } from "flowbite-react";
+import { Footer, Navbar } from "flowbite-react";
+import { Button } from "@material-tailwind/react";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
