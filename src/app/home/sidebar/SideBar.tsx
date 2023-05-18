@@ -14,17 +14,14 @@ import {
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
   Accordion,
   AccordionHeader,
   AccordionBody,
-  Collapse,
-  Button,
 } from "@material-tailwind/react";
 interface PropsetState {
   collapsed: boolean;
 }
+
 export const SideBar = (props: PropsetState) => {
   const sidebarItems = [
     { href: "#", icon: <HiChartPie />, label: "Tổng quan", gap1: true },
@@ -73,11 +70,8 @@ export const SideBar = (props: PropsetState) => {
     { href: "#", icon: <TbAppsFilled />, label: "Ứng dụng" },
     { href: "#", icon: <AiFillSetting />, label: "Setting", gap: true },
   ];
-  const [openc, setOpenc] = useState(false);
-  const toggleOpen = () => setOpenc(cur => !cur);
 
-  const [open, setOpen] = React.useState(0);
-
+  const [open, setOpen] = useState(0);
   const handleOpen = (value: number) => {
     setOpen(open === value ? 0 : value);
   };
@@ -98,7 +92,7 @@ export const SideBar = (props: PropsetState) => {
               item.children ? (
                 <Sidebar.Collapse
                   key={index}
-                  icon={item.icon}
+                  icon={HiChartPie}
                   label={item.label}
                 >
                   {item.children.map((child, childIndex) => (
@@ -112,7 +106,7 @@ export const SideBar = (props: PropsetState) => {
                   className={`${item.gap && "mt-6 border-t border-gray-700"}`}
                   key={index}
                   href={item.href}
-                  icon={item.icon}
+                  icon={HiChartPie}
                 >
                   {item.label}
                 </Sidebar.Item>
@@ -121,10 +115,7 @@ export const SideBar = (props: PropsetState) => {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar> */}
-       {/* <Button onClick={toggleOpen}>Open Collapse</Button>
-      <Collapse className="" open={openc}>
-      </Collapse> */}
-      <Card className="h-full w-64 overflow-y-auto overflow-x-hidden rounded bg-white py-4 px-3 dark:bg-[#1E1E2D]">
+      <Card className="h-full w-72 overflow-y-auto overflow-x-hidden rounded bg-white py-4 px-3 dark:bg-[#1E1E2D]">
         <div className="mb-2 flex flex-wrap items-center">
           <Image
             src="https://flowbite.com/docs/images/logo.svg"
@@ -133,7 +124,7 @@ export const SideBar = (props: PropsetState) => {
             width={64}
             height={64}
           />
-          <Typography variant="h5" className="text-black dark:text-white">
+          <Typography as="a" href="#" variant="h5" className="text-black dark:text-white">
             Sidebar
           </Typography>
         </div>
@@ -171,7 +162,7 @@ export const SideBar = (props: PropsetState) => {
                       <List className="p-0">
                         <ListItem>
                           <ListItemPrefix>
-                            {/* <HiChevronDown strokeWidth={3} className="h-3 w-5" /> */}
+                            <HiChevronDown strokeWidth={3} className="h-3 w-5" />
                           </ListItemPrefix>
                           <Typography className="mr-auto ml-5 font-normal text-black dark:text-white">
                             {child.label}
@@ -200,7 +191,6 @@ export const SideBar = (props: PropsetState) => {
           )}
         </List>
       </Card>
-
     </>
   );
 };
