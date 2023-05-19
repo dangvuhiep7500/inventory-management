@@ -625,7 +625,6 @@ export default function PageProduct() {
           </div>
         </div>
       </div>
-    
     </>
   );
 };

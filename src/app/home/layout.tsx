@@ -45,9 +45,11 @@ export default function HomeLayout({
           <div className="flex h-screen w-full flex-col">
             <div className="flex h-screen overflow-hidden bg-[#1E1E2D]">
               <SideBar collapsed={collapsed} />
-              <div className="flex-1 overflow-auto bg-[#F5F8FA] dark:bg-[#151521]">
+              <div className="flex-1 overflow-auto">
                 <NavBar collapsed={collapsed} setCollapsed={setCollapsed} />
+                <div className="bg-[#F5F8FA] dark:bg-[#151521]">
                 {children}
+                </div>
               </div>
             </div>
           </div>

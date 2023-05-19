@@ -115,7 +115,7 @@ export const SideBar = (props: PropsetState) => {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar> */}
-      <Card className="h-full w-72 overflow-y-auto overflow-x-hidden rounded bg-white py-4 px-3 dark:bg-[#1E1E2D]">
+      <Card className="h-full w-72 overflow-y-auto overflow-x-hidden rounded py-4 px-3 bg-[#1E1E2D]">
         <div className="mb-2 flex flex-wrap items-center">
           <Image
             src="https://flowbite.com/docs/images/logo.svg"
@@ -124,7 +124,7 @@ export const SideBar = (props: PropsetState) => {
             width={64}
             height={64}
           />
-          <Typography as="a" href="#" variant="h5" className="text-black dark:text-white">
+          <Typography as="a" href="#" variant="h5" className=" text-white">
             Sidebar
           </Typography>
         </div>
@@ -138,21 +138,21 @@ export const SideBar = (props: PropsetState) => {
                   icon={
                     <HiChevronDown
                       strokeWidth={2.5}
-                      className={`mx-auto h-4 w-4 transition-transform text-black dark:text-white ${
+                      className={`mx-auto h-4 w-4 transition-transform text-white ${
                         open === index ? "rotate-180" : ""
                       }`}
                     />
                   }
                 >
-                  <ListItem className="p-0" selected={open === index}>
+                  <ListItem className="p-0 hover:bg-gray-500 focus:bg-gray-500">
                     <AccordionHeader
                       onClick={() => handleOpen(index)}
                       className="border-b-0 p-3"
                     >
-                      <ListItemPrefix className="text-black dark:text-white">
+                      <ListItemPrefix className=" text-white">
                         {item.icon}
                       </ListItemPrefix>
-                      <Typography className="mr-auto font-normal text-black dark:text-white">
+                      <Typography className="mr-auto font-normal text-white">
                         {item.label}
                       </Typography>
                     </AccordionHeader>
@@ -160,11 +160,11 @@ export const SideBar = (props: PropsetState) => {
                   {item.children.map((child, childIndex) => (
                     <AccordionBody className="py-1" key={childIndex}>
                       <List className="p-0">
-                        <ListItem>
+                        <ListItem className="focus:bg-gray-500 hover:bg-gray-500">
                           <ListItemPrefix>
                             <HiChevronDown strokeWidth={3} className="h-3 w-5" />
                           </ListItemPrefix>
-                          <Typography className="mr-auto ml-5 font-normal text-black dark:text-white">
+                          <Typography className="mr-auto ml-5 font-normal text-white">
                             {child.label}
                           </Typography>
                         </ListItem>
@@ -177,12 +177,12 @@ export const SideBar = (props: PropsetState) => {
               <>
                 <ListItem
                   key={index}
-                  className={`${item.gap && "mt-6 border-t border-gray-700 "}`}
+                  className={`${item.gap && "mt-6 border-t border-gray-700"}focus:bg-gray-500 hover:bg-gray-500`}
                 >
-                  <ListItemPrefix className="text-black dark:text-white">
+                  <ListItemPrefix className=" text-white">
                     {item.icon}
                   </ListItemPrefix>
-                  <Typography className="mr-auto font-normal text-black dark:text-white">
+                  <Typography className="mr-auto font-normal text-white focus:">
                     {item.label}
                   </Typography>
                 </ListItem>
