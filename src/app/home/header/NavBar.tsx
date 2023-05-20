@@ -1,7 +1,6 @@
 import { useAuthStore } from "@/store/auth/auth";
 import { useUserStore } from "@/store/auth/user";
 import { useThemeStore } from "@/store/colorTheme/colorTheme";
-import { Dropdown } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import {
   HiMenuAlt1,

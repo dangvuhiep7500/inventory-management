@@ -50,11 +50,11 @@ export function MyDropzone() {
     <>
       <div
         {...getRootProps()}
-        className="p-4 border border-dashed items-center rounded-md dark:bg-[#212E48] border-sky-500"
+        className="p-4 border border-dashed items-center rounded-md dark:bg-[#212E48] border-blue-500"
       >
         <input {...getInputProps()} />
         <div className="flex flex-1 items-center">
-          <FaFileUpload className="text-4xl mr-4 text-sky-400" />
+          <FaFileUpload className="text-4xl mr-4 text-blue-500" />
           <div className="">
             <h3 className="font-bold text-base text-gray-900 mb-1 dark:text-white">
             Thả tập tin ở đây hoặc bấm vào để tải lên.

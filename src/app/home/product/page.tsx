@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { MyDropzone } from "../file-upload/FileUpload";
@@ -12,6 +12,7 @@ import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
 import { useCategoriesStore } from "@/store/category/category";
 import { useUserStore } from "@/store/auth/user";
+import { Breadcrumbs, Button, Input } from "@material-tailwind/react";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -39,18 +40,19 @@ export default function PageProduct() {
     }
   };
   const handleRemoveAvatar = () => {
-     setAvatar(null);
+    setAvatar(null);
   };
 
-  const {setNum1, setNum2, num1, num2, profit, profitMargin} = useProductStore((state) => state)
+  const { setNum1, setNum2, num1, num2, profit, profitMargin } =
+    useProductStore((state) => state);
   const handleNum1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
-    setNum1(newValue)
+    setNum1(newValue);
   };
   const handleNum2Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
-    setNum2(newValue)
-  }; 
+    setNum2(newValue);
+  };
 
   const [inputFields, setInputFields] = useState<string[]>([""]);
   const [hasInput, setHasInput] = useState(false);
@@ -63,10 +65,13 @@ export default function PageProduct() {
     updatedInputFields.splice(index, 1);
     setInputFields(updatedInputFields);
     if (updatedInputFields.length === 1) {
-      setHasInput(false); 
+      setHasInput(false);
     }
   };
-  const handleInputChange = (index: number, value: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    index: number,
+    value: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const updatedInputFields = [...inputFields];
     updatedInputFields[index] = value.target.value;
     setInputFields(updatedInputFields);
@@ -75,90 +80,47 @@ export default function PageProduct() {
   const { isLoading, error, fetchCategories, categories } = useCategoriesStore(
     (state) => state
   );
-  const { currentUser,userName, userEmail } = useUserStore((state) => state);
+  const { currentUser, userName, userEmail } = useUserStore((state) => state);
 
-    // useEffect(() => {
-      // fetchCategories();
-      // currentUser();
-    //   Promise.all([currentUser(), fetchCategories()]);
-    // }, [fetchCategories,currentUser]);
+  // useEffect(() => {
+  // fetchCategories();
+  // currentUser();
+  //   Promise.all([currentUser(), fetchCategories()]);
+  // }, [fetchCategories,currentUser]);
 
-    // useEffect(() => {
-    //   fetchCategories();
-      // currentUser();
-    // }, [fetchCategories,currentUser]);
-    
-    // console.log(categories,userName, userEmail);
+  // useEffect(() => {
+  //   fetchCategories();
+  // currentUser();
+  // }, [fetchCategories,currentUser]);
+
+  // console.log(categories,userName, userEmail);
   return (
     <>
       <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
         <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
           Add Product
         </h2>
-        <nav className="flex mb-3" aria-label="Breadcrumb">
-          <ol className="inline-flex items-center space-x-1 md:space-x-3">
-            <li className="inline-flex items-center">
-              <a
-                href="#"
-                className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-600 dark:hover:text-sky-500"
+        <Breadcrumbs className="bg-blue-gray-0 px-0 py-3">
+          <a href="#" className="opacity-60 text-black dark:text-white">
+            <div className="flex hover:text-light-blue-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
-                <svg
-                  aria-hidden="true"
-                  className="w-4 h-4 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                </svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <div className="flex items-center">
-                <svg
-                  aria-hidden="true"
-                  className="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <a
-                  href="#"
-                  className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-600 dark:hover:text-sky-500"
-                >
-                  Projects
-                </a>
-              </div>
-            </li>
-            <li aria-current="page">
-              <div className="flex items-center">
-                <svg
-                  aria-hidden="true"
-                  className="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-600">
-                  Flowbite
-                </span>
-              </div>
-            </li>
-          </ol>
-        </nav>
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
+              <span className="ml-1">Home</span>
+            </div>
+          </a>
+          <a href="#" className="opacity-70 text-black dark:text-white">
+            <span className="hover:text-light-blue-500">Components</span>
+          </a>
+          <a href="#" className="text-black dark:text-white">
+            <span className="hover:text-light-blue-500">Breadcrumbs</span>
+          </a>
+        </Breadcrumbs>
         <div>
           <div className="md:grid md:grid-cols-3 md:gap-4">
             <div className="md:col-span-1">
@@ -245,7 +207,7 @@ export default function PageProduct() {
                   <div className="mb-6">
                     <button
                       type="submit"
-                      className="rounded-md font-medium duration-200 bg-sky-50 dark:bg-[#212E48] py-2 px-5 text-sm text-sky-500 shadow-sm hover:bg-sky-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                      className="rounded-md font-medium duration-200 bg-blue-300 dark:bg-[#212E48] py-2 px-5 text-sm text-blue-500 shadow-sm hover:bg-blue-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                     >
                       <span className="mr-2">+</span>
                       Tạo mới thể loại
@@ -287,11 +249,14 @@ export default function PageProduct() {
                           Tên sản phẩm <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-2 flex rounded-md shadow-sm">
-                          <input
+                          <Input
                             type="text"
                             name="name-product"
                             id="name-product"
-                            className="block w-full border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full text-gray-900 text-base dark:border-gray-700 dark:!border-t-gray-700 dark:focus:!border-blue-500 focus:!border-t-blue-500 dark:text-white dark:bg-[#1E1E2D]"
+                            labelProps={{
+                              className: "before:content-none after:content-none",
+                            }}
                             placeholder="Tên sản phẩm"
                           />
                         </div>
@@ -594,7 +559,7 @@ export default function PageProduct() {
                             ))}
                             <a
                               onClick={handleAddInputField}
-                              className=" cursor-pointer rounded-md font-medium duration-200 bg-sky-50 dark:bg-[#212E48] py-2 px-5 text-sm text-sky-500 shadow-sm hover:bg-sky-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                              className=" cursor-pointer rounded-md font-medium duration-200 bg-blue-200 dark:bg-[#212E48] py-2 px-5 text-sm text-blue-500 shadow-sm hover:bg-blue-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             >
                               <span className="mr-2">+</span>
                               Thêm thuộc tính khác
@@ -615,7 +580,7 @@ export default function PageProduct() {
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md font-bold bg-sky-500 py-2 px-5 text-sm text-white shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                    className="inline-flex justify-center rounded-md font-bold bg-blue-600 py-2 px-5 text-sm text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                   >
                     Thêm sản phẩm
                   </button>
@@ -627,4 +592,4 @@ export default function PageProduct() {
       </div>
     </>
   );
-};
+}

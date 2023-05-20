@@ -213,7 +213,7 @@ function Page() {
             className="ml-2 text-sm font-medium text-gray-900"
           >
             I agree with the{" "}
-            <a href="#" className="text-sky-500 hover:text-sky-400">
+            <a href="#" className="font-medium text-blue-500 transition-colors hover:text-blue-700">
               terms and conditions
             </a>
             .
@@ -283,7 +283,7 @@ function Page() {
       </button>
       <div className="ml-2 text-base font-medium text-gray-500 text-center mt-4">
         Already have an Account?{" "}
-        <Link href={"/auth/signin"} className="text-sky-500 hover:text-sky-400">
+        <Link href={"/auth/signin"} className=" text-blue-500 transition-colors hover:text-blue-700">
           Sign in
         </Link>
         .

@@ -7,7 +7,6 @@ import { BiUserCircle } from "react-icons/bi";
 import { TbAppsFilled } from "react-icons/tb";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Image from "next/image";
-import { Sidebar } from "flowbite-react";
 import {
   Card,
   Typography,
@@ -115,7 +114,7 @@ export const SideBar = (props: PropsetState) => {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar> */}
-      <Card className="h-full w-72 overflow-y-auto overflow-x-hidden rounded py-4 px-3 bg-[#1E1E2D]">
+      <Card className="h-full w-[16rem] overflow-y-auto overflow-x-hidden rounded py-4 bg-[#1E1E2D]">
         <div className="mb-2 flex flex-wrap items-center">
           <Image
             src="https://flowbite.com/docs/images/logo.svg"
@@ -128,7 +127,8 @@ export const SideBar = (props: PropsetState) => {
             Sidebar
           </Typography>
         </div>
-        <List>
+        {/* <hr className="my-3 border-gray-700" /> */}
+        <List className="p-0 pt-3">
           {sidebarItems.map((item, index) =>
             item.children ? (
               <>
@@ -149,7 +149,7 @@ export const SideBar = (props: PropsetState) => {
                       onClick={() => handleOpen(index)}
                       className="border-b-0 p-3"
                     >
-                      <ListItemPrefix className=" text-white">
+                      <ListItemPrefix className="text-white">
                         {item.icon}
                       </ListItemPrefix>
                       <Typography className="mr-auto font-normal text-white">
@@ -162,7 +162,6 @@ export const SideBar = (props: PropsetState) => {
                       <List className="p-0">
                         <ListItem className="focus:bg-gray-500 hover:bg-gray-500">
                           <ListItemPrefix>
-                            <HiChevronDown strokeWidth={3} className="h-3 w-5" />
                           </ListItemPrefix>
                           <Typography className="mr-auto ml-5 font-normal text-white">
                             {child.label}
@@ -175,14 +174,15 @@ export const SideBar = (props: PropsetState) => {
               </>
             ) : (
               <>
+              {item.gap && <hr className="my-2 border-gray-700" />}
                 <ListItem
                   key={index}
-                  className={`${item.gap && "mt-6 border-t border-gray-700"}focus:bg-gray-500 hover:bg-gray-500`}
+                  className ="focus:bg-gray-500 hover:bg-gray-500"
                 >
                   <ListItemPrefix className=" text-white">
                     {item.icon}
                   </ListItemPrefix>
-                  <Typography className="mr-auto font-normal text-white focus:">
+                  <Typography className="mr-auto font-normal text-white">
                     {item.label}
                   </Typography>
                 </ListItem>

@@ -5,14 +5,18 @@ export const metadata = {
   },
 };
 import "@/styles/globals.scss";
-import FlowbiteContext from "@/context/FlowbiteContext";
 import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import ProvidersWrapper from "./ProvidersWrapper";
-import { ThemeProvider } from "@material-tailwind/react";
 import ProviderTheme from "./ProviderTheme";
 const inter = Inter({
-  weight: ["600", "700"],
-  subsets: ["latin"],
+  weight: ["500","600", "700","800","900"],
+  subsets: ["vietnamese"],
+  display: "swap",
+});
+const roboto = Roboto({
+  weight: ["300","500","700","900"],
+  subsets: ["latin","vietnamese"],
   display: "swap",
 });
 export default function RootLayout({
@@ -21,13 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={roboto.className}>
       <body>
-        {/* <FlowbiteContext> */}
         <ProviderTheme>
           <ProvidersWrapper>{children}</ProvidersWrapper>
         </ProviderTheme>
-        {/* </FlowbiteContext> */}
       </body>
     </html>
   );

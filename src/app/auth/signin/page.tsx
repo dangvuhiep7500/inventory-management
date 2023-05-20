@@ -120,7 +120,7 @@ function Page() {
               <div></div>
               <Link
                 href="/forgot-password"
-                className="mt-4 text-sm font-bold text-sky-500 hover:text-sky-400"
+                className="mt-4 text-sm font-medium text-blue-500 transition-colors hover:text-blue-700"
               >
                 Forgot Password ?
               </Link>
@@ -198,7 +198,7 @@ function Page() {
           Not a Member yet?{" "}
           <Link
             href={"/auth/signup"}
-            className="text-sky-500 hover:text-sky-400"
+            className="text-blue-500 transition-colors hover:text-blue-700"
           >
             Sign up
           </Link>
