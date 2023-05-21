@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaFileUpload } from 'react-icons/fa';
 import Image from 'next/legacy/image';
+import { Typography } from '@material-tailwind/react';
 export function MyDropzone() {
   const [preview, setPreview] = useState<File[]>([]);
   const handleDrop = (acceptedFiles: File[]) => {
@@ -59,9 +60,9 @@ export function MyDropzone() {
             <h3 className="font-bold text-base text-gray-900 mb-1 dark:text-white">
             Thả tập tin ở đây hoặc bấm vào để tải lên.
             </h3>
-            <span className="text-sm font-normal text-gray-400">
+            <Typography className="text-sm font-bold text-[#A1A5B7] dark:text-[#565674]">
             Tải lên tối đa 10 tệp
-            </span>
+            </Typography>
           </div>
         </div>
       </div>

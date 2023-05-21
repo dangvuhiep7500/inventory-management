@@ -174,7 +174,7 @@ export const SideBar = (props: PropsetState) => {
               </>
             ) : (
               <>
-              {item.gap && <hr className="my-2 border-gray-700" />}
+              {item.gap && <hr className="my-2 border-[#323248]" />}
                 <ListItem
                   key={index}
                   className ="focus:bg-gray-500 hover:bg-gray-500"

@@ -31,7 +31,7 @@ export const TagifyInput: React.FC<TagifyInputProps> = ({
     });
     }
   }, [inputRef,dropdownEnabled,maxDropdownItems,maxTags,whitelist]);
-  return <input ref={inputRef} className="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]" name="tags" />;
+  return <input ref={inputRef} className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]" name="tags" />;
 };
 
 export default TagifyInput;

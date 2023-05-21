@@ -12,7 +12,7 @@ import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
 import { useCategoriesStore } from "@/store/category/category";
 import { useUserStore } from "@/store/auth/user";
-import { Breadcrumbs, Button, Input } from "@material-tailwind/react";
+import { Breadcrumbs, Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -98,10 +98,10 @@ export default function PageProduct() {
     <>
       <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
         <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
-          Add Product
+          Tạo sản phẩm
         </h2>
         <Breadcrumbs className="bg-blue-gray-0 px-0 py-3">
-          <a href="#" className="opacity-60 text-black dark:text-white">
+          <a href="#" className="text-black dark:text-white">
             <div className="flex hover:text-light-blue-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,32 +111,31 @@ export default function PageProduct() {
               >
                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
               </svg>
-              <span className="ml-1">Home</span>
+              <span className="ml-1">Admin</span>
             </div>
           </a>
-          <a href="#" className="opacity-70 text-black dark:text-white">
-            <span className="hover:text-light-blue-500">Components</span>
+          <a href="#" className="text-black dark:text-white">
+            <span className="hover:text-light-blue-500">Sản phẩm</span>
           </a>
           <a href="#" className="text-black dark:text-white">
-            <span className="hover:text-light-blue-500">Breadcrumbs</span>
+            <span className="hover:text-light-blue-500">Tạo sản phẩm</span>
           </a>
         </Breadcrumbs>
         <div>
           <div className="md:grid md:grid-cols-3 md:gap-4">
             <div className="md:col-span-1">
               <div className="sm:px-0 mb-10">
-                <div className="px-8 py-10 w-full max-w-sm bg-white rounded-lg shadow dark:bg-[#1E1E2D]">
+                <div className="p-6 w-full max-w-sm bg-white rounded-md shadow dark:bg-[#1E1E2D]">
                   <div className="flex justify-start">
                     <h2 className="flex text-lg font-bold text-gray-900 dark:text-white">
                       Ảnh Nền
                     </h2>
                   </div>
                   <div className="flex flex-col items-center my-6">
-                    <div className="relative">
+                    <div className="relative block rounded-md p-1 h-48 w-48 drop-shadow-2xl object-cover">
                       {avatar ? (
                         <>
                           <Image
-                            className="block rounded-lg p-2.5 object-cover"
                             src={avatar.preview}
                             alt="avatar"
                             width={192}
@@ -151,7 +150,6 @@ export default function PageProduct() {
                         </>
                       ) : (
                         <Image
-                          className="block rounded-lg p-1 h-48 w-48 shadow-2xl object-cover "
                           src={`${
                             colorTheme === "dark"
                               ? "/blank-image-dark.svg"
@@ -180,7 +178,7 @@ export default function PageProduct() {
                 </div>
               </div>
               <div className="sm:px-0">
-                <div className="px-8 py-10 w-full max-w-sm bg-white dark:bg-[#1E1E2D] rounded-lg shadow">
+                <div className="px-8 py-10 w-full max-w-sm bg-white dark:bg-[#1E1E2D] rounded-md shadow">
                   <div className="flex justify-start">
                     <h2 className="flex text-lg font-bold text-gray-900 dark:text-white">
                       Thông tin chi tiết sản phẩm
@@ -192,7 +190,7 @@ export default function PageProduct() {
                     </h2>
                     <select
                       id="countries"
-                      className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                      className="block w-full h-11 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                     >
                       <option>Chọn loại sản phẩm</option>
                       <option value="US">United States</option>
@@ -200,14 +198,14 @@ export default function PageProduct() {
                       <option value="FR">France</option>
                       <option value="DE">Germany</option>
                     </select>
-                    <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <Typography className="mt-1 text-sm text-[#A1A5B7] dark:text-[#565674]">
                       Thêm sản phẩm vào một danh mục.
-                    </span>
+                    </Typography>
                   </div>
                   <div className="mb-6">
                     <button
                       type="submit"
-                      className="rounded-md font-medium duration-200 bg-blue-300 dark:bg-[#212E48] py-2 px-5 text-sm text-blue-500 shadow-sm hover:bg-blue-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                      className="rounded-md font-medium duration-200 bg-[#F1FAFF] py-2 px-5 text-sm text-[#009EF7] shadow-sm hover:bg-blue-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:bg-[#212E48] dark:hover:bg-blue-500"
                     >
                       <span className="mr-2">+</span>
                       Tạo mới thể loại
@@ -229,9 +227,9 @@ export default function PageProduct() {
                         ]}
                       />
                     </div>
-                    <span className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    <Typography className="mt-1 text-sm text-[#A1A5B7] dark:text-[#565674]">
                       Thêm sản phẩm vào thẻ tags.
-                    </span>
+                    </Typography>
                   </div>
                 </div>
               </div>
@@ -249,15 +247,22 @@ export default function PageProduct() {
                           Tên sản phẩm <span className="text-red-500">*</span>
                         </label>
                         <div className="mt-2 flex rounded-md shadow-sm">
-                          <Input
+                          {/* <Input
                             type="text"
                             name="name-product"
                             id="name-product"
-                            className="block w-full text-gray-900 text-base dark:border-gray-700 dark:!border-t-gray-700 dark:focus:!border-blue-500 focus:!border-t-blue-500 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full text-gray-900 text-base dark:border-[#323248] dark:!border-t-[#323248] dark:focus:!border-blue-500 focus:!border-t-blue-500 dark:text-white dark:bg-[#1E1E2D]"
                             labelProps={{
                               className: "before:content-none after:content-none",
                             }}
-                            placeholder="Tên sản phẩm"
+                            placeholder="Nhập tên sản phẩm"
+                          /> */}
+                          <input
+                            type="text"
+                            name="name-product"
+                            id="name-product"
+                            className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
+                            placeholder="Nhập tên sản phẩm"
                           />
                         </div>
                       </div>
@@ -270,9 +275,9 @@ export default function PageProduct() {
                         Mô tả sản phẩm
                       </label>
                       <ReactQuillEditor />
-                      <p className="mt-2 text-sm text-gray-500">
+                      <Typography className="mt-2 text-sm text-[#A1A5B7] dark:text-[#565674]">
                         Đặt mô tả cho sản phẩm
-                      </p>
+                      </Typography>
                     </div>
                   </div>
                 </div>
@@ -282,13 +287,13 @@ export default function PageProduct() {
                     <div className="col-span-3 sm:col-span-2">
                       <label
                         htmlFor="company-website"
-                        className="block  text-base font-bold leading-6 text-gray-900 dark:text-white"
+                        className="block text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Hình ảnh sản phẩm
                       </label>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-5">
-                          <div className="border-t border-gray-300 dark:border-gray-700" />
+                          <div className="border-t border-gray-300 dark:border-[#323248]" />
                         </div>
                       </div>
                       <MyDropzone />
@@ -299,12 +304,12 @@ export default function PageProduct() {
                 <div className="shadow sm:overflow-hidden sm:rounded-md mt-10">
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
-                      <label className="block  text-base font-bold leading-6 text-gray-900 dark:text-white">
+                      <label className="block text-base font-bold leading-6 text-gray-900 dark:text-white">
                         Giá sản phẩm
                       </label>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-3">
-                          <div className="border-t border-gray-300 dark:border-gray-700" />
+                          <div className="border-t border-gray-300 dark:border-[#323248]" />
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-6">
@@ -315,11 +320,24 @@ export default function PageProduct() {
                           >
                             Giá bán
                           </label>
+                          {/* <NumericFormat
+                            id="input-example"
+                            name="input-1"
+                            allowNegative={false}
+                            className="block w-full h-9 pl-2 rounded-md border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            customInput={CurrencyInput}
+                            intlConfig={{ locale: "vi-VN", currency: "VND" }}
+                            value={num1}
+                            defaultValue={0}
+                            onChange={handleNum1Change}
+                            groupSeparator={","}
+                            disableAbbreviations
+                          /> */}
                           <NumericFormat
                             id="input-example"
                             name="input-1"
                             allowNegative={false}
-                            className="block w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                             customInput={CurrencyInput}
                             intlConfig={{ locale: "vi-VN", currency: "VND" }}
                             value={num1}
@@ -340,7 +358,7 @@ export default function PageProduct() {
                             id="input-example"
                             name="input-1"
                             allowNegative={false}
-                            className="block w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                             customInput={CurrencyInput}
                             intlConfig={{ locale: "vi-VN", currency: "VND" }}
                             value={0}
@@ -364,7 +382,7 @@ export default function PageProduct() {
                       </label>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-3">
-                          <div className="border-t border-gray-300 dark:border-gray-700" />
+                          <div className="border-t border-gray-300 dark:border-[#323248]" />
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-6">
@@ -379,7 +397,7 @@ export default function PageProduct() {
                             id="input-example"
                             name="input-1"
                             allowNegative={false}
-                            className="block w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                             customInput={CurrencyInput}
                             intlConfig={{ locale: "vi-VN", currency: "VND" }}
                             value={num2}
@@ -441,7 +459,7 @@ export default function PageProduct() {
                             type="text"
                             name=""
                             id=""
-                            className="block w-full border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                           />
                         </div>
                         <div>
@@ -455,7 +473,7 @@ export default function PageProduct() {
                             type="text"
                             name=""
                             id=""
-                            className="block w-full border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                            className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                           />
                         </div>
                       </div>
@@ -473,31 +491,33 @@ export default function PageProduct() {
                         Biến thể
                       </label>
                       <div className="hidden sm:block" aria-hidden="true">
-                        <div className="py-3">
-                          <div className="border-t border-gray-300 dark:border-gray-700" />
+                        <div className="py-2">
+                          <div className="border-t border-gray-300 dark:border-[#323248]" />
                         </div>
                       </div>
                       <div className="flex items-center">
-                        <input
-                          id="default-checkbox"
-                          type="checkbox"
+                        <Checkbox
                           onChange={handleCheck}
-                          value=""
-                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label
-                          htmlFor="default-checkbox"
-                          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                          Sản phẩm này có nhiều biến thể. Ví dụ như khác nhau về
-                          kích thước, màu sắc
-                        </label>
+                          label={
+                            <label
+                              htmlFor="price-product"
+                              className="block cursor-pointer text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                            >
+                              Sản phẩm này có nhiều biến thể. Ví dụ như khác
+                              nhau về kích thước, màu sắc
+                            </label>
+                            // <Typography className="text-black dark:text-white">
+                            //   Sản phẩm này có nhiều biến thể. Ví dụ như khác
+                            //   nhau về kích thước, màu sắc
+                            // </Typography>
+                          }
+                        ></Checkbox>
                       </div>
                       {!checked && (
                         <>
                           <div className="hidden sm:block" aria-hidden="true">
-                            <div className="py-3">
-                              <div className="border-t border-gray-300 dark:border-gray-700" />
+                            <div className="py-2">
+                              <div className="border-t border-gray-300 dark:border-[#323248]" />
                             </div>
                           </div>
                           <div className="px-3">
@@ -513,7 +533,7 @@ export default function PageProduct() {
                                   <div>
                                     <select
                                       id="countries"
-                                      className=" block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
+                                      className="block w-full h-10 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
                                     >
                                       <option>Chọn thuộc tính</option>
                                       <option value="US">Kích cỡ</option>
@@ -549,7 +569,7 @@ export default function PageProduct() {
                                     </div>
                                     <label
                                       htmlFor="company-website"
-                                      className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                                      className="block text-sm font-medium leading-6 text-[#A1A5B7] dark:text-white"
                                     >
                                       Thêm nhãn đã có
                                     </label>
@@ -559,7 +579,7 @@ export default function PageProduct() {
                             ))}
                             <a
                               onClick={handleAddInputField}
-                              className=" cursor-pointer rounded-md font-medium duration-200 bg-blue-200 dark:bg-[#212E48] py-2 px-5 text-sm text-blue-500 shadow-sm hover:bg-blue-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                              className="cursor-pointer rounded-md font-medium duration-200 bg-[#F1FAFF] py-2 px-5 text-sm text-[#009EF7] shadow-sm hover:bg-blue-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:bg-[#212E48] dark:hover:bg-blue-500"
                             >
                               <span className="mr-2">+</span>
                               Thêm thuộc tính khác
@@ -574,7 +594,7 @@ export default function PageProduct() {
                 <div className="px-4 py-6 text-right sm:px-6">
                   <button
                     type="submit"
-                    className="mr-2 inline-flex justify-center rounded-md font-bold bg-gray-200 py-2 px-5 text-sm text-gray-500 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                    className="mr-2 inline-flex justify-center rounded-md font-bold bg-gray-200 py-2 px-5 text-sm text-[#7E8299] shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                   >
                     Hủy bỏ
                   </button>

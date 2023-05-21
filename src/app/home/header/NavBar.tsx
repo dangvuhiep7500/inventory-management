@@ -12,10 +12,11 @@ import {
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BiUserCircle } from "react-icons/bi";
-import { AiOutlinePoweroff } from "react-icons/ai";
+import { AiFillBell, AiOutlineClockCircle, AiOutlinePoweroff } from "react-icons/ai";
 import Image from "next/image";
 import {
   Avatar,
+  Badge,
   Button,
   IconButton,
   Menu,
@@ -143,9 +144,9 @@ export const NavBar = (props: PropsetState) => {
           </div>
         </div>
       </nav> */}
-      <Navbar className="sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 bg-[#1E1E2D] border-gray-700 border-l-0 border-t-0 border-r-0">
+      <Navbar className="sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 bg-[#1E1E2D] border-[#323248] border-l-0 border-t-0 border-r-0">
         <div className="flex items-center justify-between font-medium text-white">
-          <div className="flex">
+          <Link href="/home/product" className="flex">
             <Avatar
               variant="circular"
               size="sm"
@@ -160,19 +161,91 @@ export const NavBar = (props: PropsetState) => {
             >
               Material Tailwind
             </Typography>
-          </div>
+          </Link>
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              className="text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-xl p-2.5"
-              onClick={toggleTheme}
-            >
-              {colorTheme === "dark" ? (
-                <HiSun aria-label="Currently dark mode" />
-              ) : (
-                <HiMoon aria-label="Currently light mode" />
-              )}
-            </button>
+            <Menu>
+              <MenuHandler>
+                <IconButton variant="text" className="text-white">
+                  <AiFillBell className="h-5 w-5" />
+                </IconButton>
+              </MenuHandler>
+              <MenuList className="flex flex-col gap-2">
+                <MenuItem className="flex items-center gap-4 py-2 pr-8 pl-2">
+                  <Avatar
+                    variant="circular"
+                    alt="candice wu"
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <Typography
+                      variant="small"
+                      color="gray"
+                      className="font-normal"
+                    >
+                      <span className="font-medium text-blue-gray-900">Wu</span>{" "}
+                      send you a message
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      className="flex items-center gap-1 text-xs text-gray-600"
+                    >
+                      <AiOutlineClockCircle className="h-3 w-3" />
+                      13 minutes ago
+                    </Typography>
+                  </div>
+                </MenuItem>
+                <MenuItem className="flex items-center gap-4 py-2 pr-8 pl-2">
+                  <Avatar
+                    variant="circular"
+                    alt="natali craig"
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <Typography
+                      variant="small"
+                      color="gray"
+                      className="font-normal"
+                    >
+                      <span className="font-medium text-blue-gray-900">
+                        Natali
+                      </span>{" "}
+                      reply to your email
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      className="flex items-center gap-1 text-xs text-gray-600"
+                    >
+                      <AiOutlineClockCircle className="h-3 w-3" />a hour ago
+                    </Typography>
+                  </div>
+                </MenuItem>
+                <MenuItem className="flex items-center gap-4 py-2 pr-8 pl-2">
+                  <Avatar
+                    variant="circular"
+                    alt="paypal"
+                    src="https://dwglogo.com/wp-content/uploads/2016/08/PayPal_Logo_Icon.png"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <Typography
+                      variant="small"
+                      color="gray"
+                      className="font-normal"
+                    >
+                      <span className="font-medium text-blue-gray-900">
+                        PayPal
+                      </span>{" "}
+                      you&apos;ve received a payment.
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      className="flex items-center gap-1 text-xs text-gray-600"
+                    >
+                      <AiOutlineClockCircle className="h-3 w-3" />5 hours ago
+                    </Typography>
+                  </div>
+                </MenuItem>
+              </MenuList>
+            </Menu>
             <Menu
               open={isMenuOpen}
               handler={setIsMenuOpen}
@@ -233,7 +306,7 @@ export const NavBar = (props: PropsetState) => {
                         variant="small"
                         className="font-normal"
                         color={isLastItem ? "red" : "inherit"}
-                        >
+                      >
                         {label}
                       </Typography>
                     </MenuItem>
@@ -241,6 +314,17 @@ export const NavBar = (props: PropsetState) => {
                 })}
               </MenuList>
             </Menu>
+            <button
+              type="button"
+              className="text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-700 rounded-lg text-xl p-2.5"
+              onClick={toggleTheme}
+            >
+              {colorTheme === "dark" ? (
+                <HiSun aria-label="Currently dark mode" />
+              ) : (
+                <HiMoon aria-label="Currently light mode" />
+              )}
+            </button>
           </div>
         </div>
       </Navbar>

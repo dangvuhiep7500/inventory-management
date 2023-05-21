@@ -11,10 +11,10 @@ export const ReactQuillEditor = () => {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       [{ font: [] }],
-      ["bold", "italic", "underline", "strike"],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{ color: [] }, { background: [] }],
       [{ align: [] }],
-      [{ list: "ordered" }, { list: "bullet" }],
+      [{ list: "ordered" }, { list: "bullet" },{'indent': '-1'}, {'indent': '+1'}],
       ['link', 'image', 'video'],
       ["clean"],
     ],
