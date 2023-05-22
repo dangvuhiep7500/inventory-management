@@ -76,44 +76,6 @@ export const SideBar = (props: PropsetState) => {
   };
   return (
     <>
-      {/* <Sidebar
-        id="logo-sidebar"
-        aria-label="Sidebar"
-        className={`${props.collapsed ? "w-72" : "w-20"} duration-300`}
-        collapsed={!props.collapsed}
-      >
-        <Sidebar.Items>
-          <Sidebar.ItemGroup>
-            <Sidebar.Logo className="text-white" href="#" img="/img/logo.png" imgAlt="Flowbite logo">
-              Flowbite
-            </Sidebar.Logo>
-            {sidebarItems.map((item, index) =>
-              item.children ? (
-                <Sidebar.Collapse
-                  key={index}
-                  icon={HiChartPie}
-                  label={item.label}
-                >
-                  {item.children.map((child, childIndex) => (
-                    <Sidebar.Item key={childIndex} href={child.href}>
-                      {child.label}
-                    </Sidebar.Item>
-                  ))}
-                </Sidebar.Collapse>
-              ) : (
-                <Sidebar.Item
-                  className={`${item.gap && "mt-6 border-t border-gray-700"}`}
-                  key={index}
-                  href={item.href}
-                  icon={HiChartPie}
-                >
-                  {item.label}
-                </Sidebar.Item>
-              )
-            )}
-          </Sidebar.ItemGroup>
-        </Sidebar.Items>
-      </Sidebar> */}
       <Card className="h-full w-[16rem] overflow-y-auto overflow-x-hidden rounded py-4 bg-[#1E1E2D]">
         <div className="mb-2 flex flex-wrap items-center">
           <Image
@@ -127,66 +89,58 @@ export const SideBar = (props: PropsetState) => {
             Sidebar
           </Typography>
         </div>
-        {/* <hr className="my-3 border-gray-700" /> */}
         <List className="p-0 pt-3">
           {sidebarItems.map((item, index) =>
             item.children ? (
-              <>
-                <Accordion
-                  key={index}
-                  open={open === index}
-                  icon={
-                    <HiChevronDown
-                      strokeWidth={2.5}
-                      className={`mx-auto h-4 w-4 transition-transform text-white ${
-                        open === index ? "rotate-180" : ""
-                      }`}
-                    />
-                  }
-                >
-                  <ListItem className="p-0 hover:bg-gray-500 focus:bg-gray-500">
-                    <AccordionHeader
-                      onClick={() => handleOpen(index)}
-                      className="border-b-0 p-3"
-                    >
-                      <ListItemPrefix className="text-white">
-                        {item.icon}
-                      </ListItemPrefix>
-                      <Typography className="mr-auto font-normal text-white">
-                        {item.label}
-                      </Typography>
-                    </AccordionHeader>
-                  </ListItem>
-                  {item.children.map((child, childIndex) => (
-                    <AccordionBody className="py-1" key={childIndex}>
-                      <List className="p-0">
-                        <ListItem className="focus:bg-gray-500 hover:bg-gray-500">
-                          <ListItemPrefix>
-                          </ListItemPrefix>
-                          <Typography className="mr-auto ml-5 font-normal text-white">
-                            {child.label}
-                          </Typography>
-                        </ListItem>
-                      </List>
-                    </AccordionBody>
-                  ))}
-                </Accordion>
-              </>
+              <Accordion
+                key={index}
+                open={open === index}
+                icon={
+                  <HiChevronDown
+                    strokeWidth={2.5}
+                    className={`mx-auto h-4 w-4 transition-transform text-white ${
+                      open === index ? "rotate-180" : ""
+                    }`}
+                  />
+                }
+              >
+                <ListItem className="p-0 hover:bg-gray-500 focus:bg-gray-500">
+                  <AccordionHeader
+                    onClick={() => handleOpen(index)}
+                    className="border-b-0 p-3"
+                  >
+                    <ListItemPrefix className="text-white">
+                      {item.icon}
+                    </ListItemPrefix>
+                    <Typography className="mr-auto font-normal text-white">
+                      {item.label}
+                    </Typography>
+                  </AccordionHeader>
+                </ListItem>
+                {item.children.map((child, childIndex) => (
+                  <AccordionBody className="py-1" key={childIndex}>
+                    <List className="p-0 pl-4">
+                      <ListItem className="focus:bg-gray-500 hover:bg-gray-500">
+                        <Typography className="mr-auto ml-5 font-normal text-white">
+                          {child.label}
+                        </Typography>
+                      </ListItem>
+                    </List>
+                  </AccordionBody>
+                ))}
+              </Accordion>
             ) : (
-              <>
-              {item.gap && <hr className="my-2 border-[#323248]" />}
-                <ListItem
-                  key={index}
-                  className ="focus:bg-gray-500 hover:bg-gray-500"
-                >
-                  <ListItemPrefix className=" text-white">
+              <div key={index}>
+                {item.gap && <hr className="my-2 border-[#323248]" />}
+                <ListItem className="focus:bg-gray-500 hover:bg-gray-500">
+                  <ListItemPrefix className="text-white">
                     {item.icon}
                   </ListItemPrefix>
                   <Typography className="mr-auto font-normal text-white">
                     {item.label}
                   </Typography>
                 </ListItem>
-              </>
+              </div>
             )
           )}
         </List>
