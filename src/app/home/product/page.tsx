@@ -12,7 +12,7 @@ import useProductStore from "@/store/product/product";
 import Image from "next/legacy/image";
 import { useCategoriesStore } from "@/store/category/category";
 import { useUserStore } from "@/store/auth/user";
-import { Breadcrumbs, Button, Checkbox, Input, Typography } from "@material-tailwind/react";
+import { Breadcrumbs, Checkbox, Typography } from "@material-tailwind/react";
 interface AvatarFile extends File {
   preview: string;
 }
@@ -97,9 +97,12 @@ export default function PageProduct() {
   return (
     <>
       <div className="mx-auto max-w-screen-xl max-w-s p-4 lg:p-1">
-        <h2 className="flex text-xl font-bold text-gray-900 dark:text-white">
+        <Typography
+          variant="h2"
+          className="flex text-xl font-bold text-gray-900 dark:text-white"
+        >
           Tạo sản phẩm
-        </h2>
+        </Typography>
         <Breadcrumbs className="bg-blue-gray-0 px-0 py-3">
           <a href="#" className="text-black dark:text-white">
             <div className="flex hover:text-light-blue-500">
@@ -111,14 +114,18 @@ export default function PageProduct() {
               >
                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
               </svg>
-              <span className="ml-1">Admin</span>
+              <Typography className="">Admin</Typography>
             </div>
           </a>
           <a href="#" className="text-black dark:text-white">
-            <span className="hover:text-light-blue-500">Sản phẩm</span>
+            <Typography className="hover:text-light-blue-500">
+              Sản phẩm
+            </Typography>
           </a>
           <a href="#" className="text-black dark:text-white">
-            <span className="hover:text-light-blue-500">Tạo sản phẩm</span>
+            <Typography className="hover:text-light-blue-500">
+              Tạo sản phẩm
+            </Typography>
           </a>
         </Breadcrumbs>
         <div>
@@ -127,9 +134,12 @@ export default function PageProduct() {
               <div className="sm:px-0 mb-10">
                 <div className="p-6 w-full max-w-sm bg-white rounded-md shadow dark:bg-[#1E1E2D]">
                   <div className="flex justify-start">
-                    <h2 className="flex text-lg font-bold text-gray-900 dark:text-white">
+                    <Typography
+                      variant="h2"
+                      className="flex text-lg font-bold text-gray-900 dark:text-white"
+                    >
                       Ảnh Nền
-                    </h2>
+                    </Typography>
                   </div>
                   <div className="flex flex-col items-center my-6">
                     <div className="relative block rounded-md p-1 h-48 w-48 drop-shadow-2xl object-cover">
@@ -160,12 +170,12 @@ export default function PageProduct() {
                           height={192}
                         />
                       )}
-                      <label
+                      <Typography
                         htmlFor="avatar-upload"
                         className="absolute top-[-0.2rem] right-[-0.2rem] p-1.5 bg-gray-800 text-white rounded-full cursor-pointer"
                       >
                         <GoPencil className="text-sm" />
-                      </label>
+                      </Typography>
                       <input
                         id="avatar-upload"
                         type="file"
@@ -180,14 +190,20 @@ export default function PageProduct() {
               <div className="sm:px-0">
                 <div className="px-8 py-10 w-full max-w-sm bg-white dark:bg-[#1E1E2D] rounded-md shadow">
                   <div className="flex justify-start">
-                    <h2 className="flex text-lg font-bold text-gray-900 dark:text-white">
+                    <Typography
+                      variant="h2"
+                      className="flex text-lg font-bold text-gray-900 dark:text-white"
+                    >
                       Thông tin chi tiết sản phẩm
-                    </h2>
+                    </Typography>
                   </div>
                   <div className="flex flex-col justify-start my-6">
-                    <h2 className="flex text-base font-medium text-gray-900 mb-1 dark:text-white">
+                    <Typography
+                      variant="h2"
+                      className="flex text-base font-medium text-gray-900 mb-1 dark:text-white"
+                    >
                       Thể loại
-                    </h2>
+                    </Typography>
                     <select
                       id="countries"
                       className="block w-full h-11 pl-2 rounded-md placeholder-[#565674] placeholder-opacity-50 dark:placeholder-opacity-100 text-gray-900 text-base focus:outline-none focus:ring-1 dark:focus:ring-[#474761] focus:ring-[#B5B5C3] border border-[#E4E6EF] dark:border-[#323248] dark:text-white dark:bg-[#1E1E2D]"
@@ -212,9 +228,12 @@ export default function PageProduct() {
                     </button>
                   </div>
                   <div className="flex flex-col justify-start">
-                    <h2 className="flex text-base font-medium pb-1 text-gray-900 dark:text-white ">
+                    <Typography
+                      variant="h2"
+                      className="flex text-base font-medium pb-1 text-gray-900 dark:text-white "
+                    >
                       Thẻ tags
-                    </h2>
+                    </Typography>
                     <div>
                       <TagifyInput
                         whitelist={[
@@ -240,23 +259,13 @@ export default function PageProduct() {
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="">
                       <div className="col-span-3 sm:col-span-2">
-                        <label
+                        <Typography
                           htmlFor="name-product"
                           className="block text-base font-medium leading-6 text-gray-900 dark:text-white"
                         >
                           Tên sản phẩm <span className="text-red-500">*</span>
-                        </label>
+                        </Typography>
                         <div className="mt-2 flex rounded-md shadow-sm">
-                          {/* <Input
-                            type="text"
-                            name="name-product"
-                            id="name-product"
-                            className="block w-full text-gray-900 text-base dark:border-[#323248] dark:!border-t-[#323248] dark:focus:!border-blue-500 focus:!border-t-blue-500 dark:text-white dark:bg-[#1E1E2D]"
-                            labelProps={{
-                              className: "before:content-none after:content-none",
-                            }}
-                            placeholder="Nhập tên sản phẩm"
-                          /> */}
                           <input
                             type="text"
                             name="name-product"
@@ -268,12 +277,12 @@ export default function PageProduct() {
                       </div>
                     </div>
                     <div>
-                      <label
+                      <Typography
                         htmlFor="about"
                         className="block text-base font-medium leading-6 text-gray-900 dark:text-white"
                       >
                         Mô tả sản phẩm
-                      </label>
+                      </Typography>
                       <ReactQuillEditor />
                       <Typography className="mt-2 text-sm text-[#A1A5B7] dark:text-[#565674]">
                         Đặt mô tả cho sản phẩm
@@ -285,12 +294,12 @@ export default function PageProduct() {
                 <div className="shadow sm:overflow-hidden sm:rounded-md mt-10">
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
-                      <label
+                      <Typography
                         htmlFor="company-website"
                         className="block text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Hình ảnh sản phẩm
-                      </label>
+                      </Typography>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-5">
                           <div className="border-t border-gray-300 dark:border-[#323248]" />
@@ -304,9 +313,9 @@ export default function PageProduct() {
                 <div className="shadow sm:overflow-hidden sm:rounded-md mt-10">
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
-                      <label className="block text-base font-bold leading-6 text-gray-900 dark:text-white">
+                      <Typography className="block text-base font-bold leading-6 text-gray-900 dark:text-white">
                         Giá sản phẩm
-                      </label>
+                      </Typography>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-3">
                           <div className="border-t border-gray-300 dark:border-[#323248]" />
@@ -314,25 +323,12 @@ export default function PageProduct() {
                       </div>
                       <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label
+                          <Typography
                             htmlFor="price-product"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Giá bán
-                          </label>
-                          {/* <NumericFormat
-                            id="input-example"
-                            name="input-1"
-                            allowNegative={false}
-                            className="block w-full h-9 pl-2 rounded-md border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 dark:border-gray-700 dark:text-white dark:bg-[#1E1E2D]"
-                            customInput={CurrencyInput}
-                            intlConfig={{ locale: "vi-VN", currency: "VND" }}
-                            value={num1}
-                            defaultValue={0}
-                            onChange={handleNum1Change}
-                            groupSeparator={","}
-                            disableAbbreviations
-                          /> */}
+                          </Typography>
                           <NumericFormat
                             id="input-example"
                             name="input-1"
@@ -348,12 +344,12 @@ export default function PageProduct() {
                           />
                         </div>
                         <div>
-                          <label
+                          <Typography
                             htmlFor="company-website"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Giá so sánh
-                          </label>
+                          </Typography>
                           <NumericFormat
                             id="input-example"
                             name="input-1"
@@ -374,12 +370,12 @@ export default function PageProduct() {
                 <div className="shadow sm:overflow-hidden sm:rounded-md mt-10">
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
-                      <label
+                      <Typography
                         htmlFor="company-website"
                         className="block  text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Quản lý tồn kho
-                      </label>
+                      </Typography>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-3">
                           <div className="border-t border-gray-300 dark:border-[#323248]" />
@@ -387,12 +383,12 @@ export default function PageProduct() {
                       </div>
                       <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label
+                          <Typography
                             htmlFor="company-website"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Giá vốn
-                          </label>
+                          </Typography>
                           <NumericFormat
                             id="input-example"
                             name="input-1"
@@ -409,12 +405,12 @@ export default function PageProduct() {
                         </div>
                         <div className="flex flex-1 gap-6">
                           <div>
-                            <label
+                            <Typography
                               htmlFor=""
                               className="block text-sm font-normal leading-6 text-gray-900 dark:text-white"
                             >
                               Biên lợi nhuận:
-                            </label>
+                            </Typography>
                             <NumericFormat
                               id="input-example"
                               name="input-1"
@@ -427,12 +423,12 @@ export default function PageProduct() {
                             />
                           </div>
                           <div>
-                            <label
+                            <Typography
                               htmlFor="company-website"
                               className="block text-sm font-normal leading-6 text-gray-900 dark:text-white"
                             >
                               Lợi nhuận:
-                            </label>
+                            </Typography>
                             <NumericFormat
                               id="input-example"
                               name="input-1"
@@ -449,12 +445,12 @@ export default function PageProduct() {
                       </div>
                       <div className="grid grid-cols-2 gap-6 mt-3">
                         <div>
-                          <label
+                          <Typography
                             htmlFor="price-product"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             SKU
-                          </label>
+                          </Typography>
                           <input
                             type="text"
                             name=""
@@ -463,12 +459,12 @@ export default function PageProduct() {
                           />
                         </div>
                         <div>
-                          <label
+                          <Typography
                             htmlFor="company-website"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Barcode
-                          </label>
+                          </Typography>
                           <input
                             type="text"
                             name=""
@@ -484,12 +480,12 @@ export default function PageProduct() {
                 <div className="shadow sm:overflow-hidden sm:rounded-md mt-10">
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
-                      <label
+                      <Typography
                         htmlFor="company-website"
                         className="block text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Biến thể
-                      </label>
+                      </Typography>
                       <div className="hidden sm:block" aria-hidden="true">
                         <div className="py-2">
                           <div className="border-t border-gray-300 dark:border-[#323248]" />
@@ -499,17 +495,13 @@ export default function PageProduct() {
                         <Checkbox
                           onChange={handleCheck}
                           label={
-                            <label
+                            <Typography
                               htmlFor="price-product"
-                              className="block cursor-pointer text-sm font-medium leading-6 text-gray-900 dark:text-white"
+                              className="block cursor-pointer text-sm leading-6 text-gray-900 dark:text-white"
                             >
                               Sản phẩm này có nhiều biến thể. Ví dụ như khác
                               nhau về kích thước, màu sắc
-                            </label>
-                            // <Typography className="text-black dark:text-white">
-                            //   Sản phẩm này có nhiều biến thể. Ví dụ như khác
-                            //   nhau về kích thước, màu sắc
-                            // </Typography>
+                            </Typography>
                           }
                         ></Checkbox>
                       </div>
@@ -523,12 +515,12 @@ export default function PageProduct() {
                           <div className="px-3">
                             {inputFields.map((input, index) => (
                               <div key={index}>
-                                <label
+                                <Typography
                                   htmlFor="company-website"
                                   className="block mb-2 text-sm font-bold leading-6 text-gray-900 dark:text-white"
                                 >
                                   Thuộc tính {index + 1}
-                                </label>
+                                </Typography>
                                 <div className="grid gap-6 mb-2 md:grid-cols-3">
                                   <div>
                                     <select
@@ -567,12 +559,12 @@ export default function PageProduct() {
                                         </a>
                                       )}
                                     </div>
-                                    <label
+                                    <Typography
                                       htmlFor="company-website"
                                       className="block text-sm font-medium leading-6 text-[#A1A5B7] dark:text-white"
                                     >
                                       Thêm nhãn đã có
-                                    </label>
+                                    </Typography>
                                   </div>
                                 </div>
                               </div>

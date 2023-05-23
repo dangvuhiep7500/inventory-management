@@ -1,23 +1,21 @@
 .my-quill {
   .ql-snow {
     @apply border border-[#E4E6EF] rounded dark:border-[#323248];
-
-    .ql-picker-label {
-      @apply text-[#A1A5B7] dark:text-[#565674];
-    }
-
-    .ql-fill {
-      @apply fill-[#A1A5B7] dark:fill-[#565674];
-    }
-
-    .ql-stroke {
-      @apply stroke-[#A1A5B7] dark:stroke-[#565674]
-    }
   }
-
+  .ql-picker-label {
+    @apply text-[#A1A5B7] dark:text-[#565674];
+  }
+  .ql-fill {
+    @apply fill-[#A1A5B7] dark:fill-[#565674];
+  }
+  .ql-stroke {
+    @apply stroke-[#A1A5B7] dark:stroke-[#565674]
+  }
+  .ql-tooltip {
+    @apply ml-36
+  }
   .ql-editor {
     @apply min-h-[250px];
-
     &.ql-blank {
       &:before {
         @apply text-[#A1A5B7] dark:text-[#565674]
