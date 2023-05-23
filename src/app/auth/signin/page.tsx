@@ -17,7 +17,7 @@ const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 const initialValues = {
-  email: "string",
+  email: "admin@gmail.com",
   password: "string",
 };
 
@@ -35,7 +35,7 @@ function Page() {
          const res =  await signIn("credentials", {
             email: values.email,
             password: values.password,
-            redirect: false,
+            redirect: true,
             callbackUrl: "/home/product",
           });
         console.log(res);

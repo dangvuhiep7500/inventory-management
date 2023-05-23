@@ -19,7 +19,6 @@ export const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
-        const agent = new https.Agent({ rejectUnauthorized: false });
         const requestOptions = {
           method: "POST",
           headers: {
@@ -30,7 +29,6 @@ export const authOptions: NextAuthOptions = {
             email,
             password,
           }),// Replace with the request body, if needed
-          agent: agent, // Pass the agent as a separate property
         };
         try {
           const res = await fetch(`https://localhost:5000/auth/login`,requestOptions);
