@@ -6,6 +6,19 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuthStore } from "@/store/auth/auth";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { Input, Typography } from "@material-tailwind/react";
+import type { InputStateStylesType } from "@material-tailwind/react";
+const inputVariantStyles: InputStateStylesType = {
+    label: {
+      color: "red",
+    },
+};
+const inputStyles = {
+  label: {
+    color: "red", // Thay đổi màu sắc label thành màu đỏ
+    // Các thuộc tính khác cho label
+  },
+};
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .min(3, "Minimum 3 symbols")
@@ -58,9 +71,14 @@ function Page() {
           onSubmit={formik.handleSubmit}
           className="flex flex-col gap-4 w-[25rem]"
         >
-          <h2 className="font-medium text-3xl text-dark text-center mb-5">
-            Signin to Your Account
-          </h2>
+          <div className="text-center">
+          <Typography variant="h3">
+            Đăng nhập
+          </Typography>
+          <Typography color="gray" className="font-normal">
+            Xin chào, vui lòng nhập thông tin đăng nhập
+          </Typography>
+          </div>
           {error && (
             <div
               className="flex p-4 text-sm text-red-800 rounded-lg bg-red-200"
@@ -85,30 +103,22 @@ function Page() {
             </div>
           )}
           <div className="relative block">
-            <label className="block mb-2 text-base font-medium text-dark">
-              USERNAME
-            </label>
             <input
-              placeholder="Username"
+              placeholder="Tên đăng nhập"
               {...formik.getFieldProps("email")}
-              className="placeholder:text-slate-400  border border-gray-200 bg-gray-100 text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+              className="placeholder:text-gray-500 border border-gray-200 bg-gray-50 text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
               autoComplete="off"
             />
             {formik.touched.email && formik.errors.email && (
-              <p className="mt-1 text-sm text-red-600">
-                {formik.errors.email}
-              </p>
+              <p className="mt-1 text-sm text-red-600">{formik.errors.email}</p>
             )}
           </div>
           <div className="relative block">
-            <label className="block mb-2 text-base font-medium text-dark">
-              PASSWORD
-            </label>
             <input
               type="password"
               placeholder="Password"
               {...formik.getFieldProps("password")}
-              className="placeholder:text-slate-400 border border-gray-200 bg-gray-100 text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+              className="placeholder:text-gray-500 border border-gray-200 bg-gray-50 text-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
               autoComplete="off"
             />
             {formik.touched.password && formik.errors.password && (
@@ -122,7 +132,7 @@ function Page() {
                 href="/forgot-password"
                 className="mt-4 text-sm font-medium text-blue-500 transition-colors hover:text-blue-700"
               >
-                Forgot Password ?
+                Quên mật khẩu ?
               </Link>
             </div>
           </div>
@@ -131,7 +141,7 @@ function Page() {
             className="font-bold bg-blue-500 hover:bg-blue-600 rounded-xl text-white py-2 hover:scale-105 duration-300"
             type="submit"
           >
-            {!isLoading && <span className="indicator-label">Login</span>}
+            {!isLoading && <span className="indicator-label">Đăng nhập</span>}
             {isLoading && (
               <span>
                 <svg
@@ -151,7 +161,7 @@ function Page() {
                     fill="currentColor"
                   />
                 </svg>
-                Loading...
+                Đang tải...
               </span>
             )}
           </button>
@@ -159,12 +169,12 @@ function Page() {
 
         <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
           <hr className="border-gray-400" />
-          <p className="text-center text-sm">OR</p>
+          <p className="text-center text-sm">Hoặc</p>
           <hr className="border-gray-400" />
         </div>
 
         <button
-          onClick={() => signIn('google', { callbackUrl: '/home/product' })}
+          onClick={() => signIn("google", { callbackUrl: "/home/product" })}
           type="button"
           className="font-bold bg-gray-200 border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-gray-600"
         >
@@ -191,16 +201,16 @@ function Page() {
               d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
             />
           </svg>
-          Login with Google
+          Đăng nhập với Google
         </button>
 
         <div className="ml-2 text-base font-medium text-gray-500 text-center mt-4">
-          Not a Member yet?{" "}
+          Chưa có tài khoản?{" "}
           <Link
             href={"/auth/signup"}
             className="text-blue-500 transition-colors hover:text-blue-700"
           >
-            Sign up
+            Đăng kí
           </Link>
           .
         </div>

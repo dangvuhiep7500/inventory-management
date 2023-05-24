@@ -171,7 +171,6 @@ export default function PageProduct() {
                         />
                       )}
                       <Typography
-                        htmlFor="avatar-upload"
                         className="absolute top-[-0.2rem] right-[-0.2rem] p-1.5 bg-gray-800 text-white rounded-full cursor-pointer"
                       >
                         <GoPencil className="text-sm" />
@@ -260,7 +259,6 @@ export default function PageProduct() {
                     <div className="">
                       <div className="col-span-3 sm:col-span-2">
                         <Typography
-                          htmlFor="name-product"
                           className="block text-base font-medium leading-6 text-gray-900 dark:text-white"
                         >
                           Tên sản phẩm <span className="text-red-500">*</span>
@@ -278,7 +276,6 @@ export default function PageProduct() {
                     </div>
                     <div>
                       <Typography
-                        htmlFor="about"
                         className="block text-base font-medium leading-6 text-gray-900 dark:text-white"
                       >
                         Mô tả sản phẩm
@@ -295,7 +292,6 @@ export default function PageProduct() {
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
                       <Typography
-                        htmlFor="company-website"
                         className="block text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Hình ảnh sản phẩm
@@ -324,7 +320,6 @@ export default function PageProduct() {
                       <div className="grid grid-cols-2 gap-6">
                         <div>
                           <Typography
-                            htmlFor="price-product"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Giá bán
@@ -345,7 +340,6 @@ export default function PageProduct() {
                         </div>
                         <div>
                           <Typography
-                            htmlFor="company-website"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Giá so sánh
@@ -371,7 +365,6 @@ export default function PageProduct() {
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
                       <Typography
-                        htmlFor="company-website"
                         className="block  text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Quản lý tồn kho
@@ -384,7 +377,6 @@ export default function PageProduct() {
                       <div className="grid grid-cols-2 gap-6">
                         <div>
                           <Typography
-                            htmlFor="company-website"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Giá vốn
@@ -406,7 +398,6 @@ export default function PageProduct() {
                         <div className="flex flex-1 gap-6">
                           <div>
                             <Typography
-                              htmlFor=""
                               className="block text-sm font-normal leading-6 text-gray-900 dark:text-white"
                             >
                               Biên lợi nhuận:
@@ -424,7 +415,6 @@ export default function PageProduct() {
                           </div>
                           <div>
                             <Typography
-                              htmlFor="company-website"
                               className="block text-sm font-normal leading-6 text-gray-900 dark:text-white"
                             >
                               Lợi nhuận:
@@ -446,7 +436,6 @@ export default function PageProduct() {
                       <div className="grid grid-cols-2 gap-6 mt-3">
                         <div>
                           <Typography
-                            htmlFor="price-product"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             SKU
@@ -460,7 +449,6 @@ export default function PageProduct() {
                         </div>
                         <div>
                           <Typography
-                            htmlFor="company-website"
                             className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                           >
                             Barcode
@@ -481,7 +469,6 @@ export default function PageProduct() {
                   <div className="space-y-6 px-4 py-5 sm:p-6 bg-white dark:bg-[#1E1E2D]">
                     <div className="col-span-3 sm:col-span-2">
                       <Typography
-                        htmlFor="company-website"
                         className="block text-base font-bold leading-6 text-gray-900 dark:text-white"
                       >
                         Biến thể
@@ -496,7 +483,6 @@ export default function PageProduct() {
                           onChange={handleCheck}
                           label={
                             <Typography
-                              htmlFor="price-product"
                               className="block cursor-pointer text-sm leading-6 text-gray-900 dark:text-white"
                             >
                               Sản phẩm này có nhiều biến thể. Ví dụ như khác
@@ -516,7 +502,6 @@ export default function PageProduct() {
                             {inputFields.map((input, index) => (
                               <div key={index}>
                                 <Typography
-                                  htmlFor="company-website"
                                   className="block mb-2 text-sm font-bold leading-6 text-gray-900 dark:text-white"
                                 >
                                   Thuộc tính {index + 1}
@@ -560,7 +545,6 @@ export default function PageProduct() {
                                       )}
                                     </div>
                                     <Typography
-                                      htmlFor="company-website"
                                       className="block text-sm font-medium leading-6 text-[#A1A5B7] dark:text-white"
                                     >
                                       Thêm nhãn đã có
