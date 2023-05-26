@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth/auth";
-import { Typography } from "@material-tailwind/react";
+import { Checkbox, Typography } from "@material-tailwind/react";
 
 const initialValues = {
   firstName: "",
@@ -21,34 +21,34 @@ const registrationSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("First name is required"),
+    .required("Nhập họ"),
   email: Yup.string()
     .email("Wrong email format")
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Email is required"),
+    .required("Nhập một địa chỉ Email"),
   username: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Username is required"),
+    .required("Nhập tên đăng người dùng"),
   lastName: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Last name is required"),
+    .required("Nhập tên"),
   password: Yup.string()
     .min(6, "Minimum 6 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Password is required"),
+    .required("Nhập mật khẩu"),
   confirmpassword: Yup.string()
-    .required("Password confirmation is required")
+    .required("Nhập xác nhận mật khẩu")
     .when("password", {
       is: (val: string) => (val && val.length > 0 ? true : false),
       then: Yup.string().oneOf(
         [Yup.ref("password")],
-        "Password and Confirm Password didn't match"
+        "Mật khẩu và xác nhận mật khẩu không khớp"
       ),
     }),
-  acceptTerms: Yup.bool().required("You must accept the terms and conditions"),
+  acceptTerms: Yup.bool().required("Bạn phải chấp nhận các điều khoản và điều kiện"),
 });
 function Page() {
   const { isLoading, error, successRegister, register } = useAuthStore((state) => (state));
@@ -76,7 +76,7 @@ function Page() {
         <Typography variant="h3" className="text-center mb-5">
           Đăng ký tài khoản
         </Typography>
-        
+
         {error && (
           <div
             className="flex p-4 text-sm text-red-800 rounded-lg bg-red-50"
@@ -100,7 +100,7 @@ function Page() {
             </div>
           </div>
         )}
-        <div className="grid gap-2 mb-2 md:grid-cols-2">
+        <div className="grid gap-2 md:grid-cols-2">
           <div className="block">
             <input
               placeholder="Họ"
@@ -182,7 +182,25 @@ function Page() {
             </p>
           )}
         </div>
-        <div className="flex items-start mb-4">
+        <Checkbox
+        className="w-4 h-4 rounded-sm"
+        required
+            label={
+              <Typography color="blue-gray" className="font-semibold flex text-sm">
+                Tôi đồng ý với các
+                <Typography
+                  as="a"
+                  href="#"
+                  color="blue"
+                  className="font-semibold hover:text-blue-700 transition-colors text-sm"
+                >
+                  &nbsp;điều khoản và điều kiện
+                </Typography>
+                .
+              </Typography>
+            }
+          />
+        {/* <div className="flex items-start mb-4">
           <div className="flex items-center h-5">
             <input
               id="remember"
@@ -196,13 +214,16 @@ function Page() {
             htmlFor="remember"
             className="ml-2 text-sm font-medium text-gray-900"
           >
-            Tôi đồng ý với các {" "}
-            <a href="#" className="font-medium text-blue-500 transition-colors hover:text-blue-700">
-            điều khoản và điều kiện
+            Tôi đồng ý với các{" "}
+            <a
+              href="#"
+              className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+            >
+              điều khoản và điều kiện
             </a>
             .
           </label>
-        </div>
+        </div> */}
         <button
           className="font-bold bg-blue-500 hover:bg-blue-600 rounded-xl text-white py-2 hover:scale-105 duration-300"
           type="submit"
@@ -235,7 +256,7 @@ function Page() {
 
       <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
         <hr className="border-gray-400" />
-        <p className="text-center text-sm">OR</p>
+        <p className="text-center text-sm">Hoặc</p>
         <hr className="border-gray-400" />
       </div>
 
@@ -263,11 +284,14 @@ function Page() {
             d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
           />
         </svg>
-       Đăng kí với Google
+        Đăng kí với Google
       </button>
       <div className="ml-2 text-base font-medium text-gray-500 text-center mt-4">
-      Bạn đã có sẵn một tai khoản?{" "}
-        <Link href={"/auth/signin"} className=" text-blue-500 transition-colors hover:text-blue-700">
+        Bạn đã có sẵn một tài khoản?{" "}
+        <Link
+          href={"/auth/signin"}
+          className=" text-blue-500 transition-colors hover:text-blue-700"
+        >
           Đăng nhập
         </Link>
         .

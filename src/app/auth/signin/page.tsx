@@ -23,11 +23,11 @@ const loginSchema = Yup.object().shape({
   email: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Username is required"),
+    .required("Vui lòng nhập thông tin Tên đăng nhập."),
   password: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
-    .required("Password is required"),
+    .required("Vui lòng nhập thông tin Mật khẩu."),
 });
 const initialValues = {
   email: "admin@gmail.com",
